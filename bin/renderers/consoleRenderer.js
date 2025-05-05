@@ -59,7 +59,7 @@ function highlightLine(line) {
 
 // Helper: Render shortcut descriptions at the bottom of the console
 function renderShortcuts() {
-    const shortcuts = "↑↓ Nav | ↵ Select | Esc Quit | ⇥ Demote | ⇧⇥ Promote | ⇧↓ Item Down | ⇧↑ Item Up";
+    const shortcuts = "↑↓ Nav | ↵ Select | Esc Quit | → Demote | ← Promote | ⇧↓ Item Down | ⇧↑ Item Up";
     const [, width] = process.stdout.getWindowSize();
     const paddedShortcuts = shortcuts.padEnd(width, ' ');
     process.stdout.write(`\n${paddedShortcuts}`);

@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
-    "flat-json-tree": "./bin/cli.js"
+    "fjt": "./bin/cli.js"
   },
   "keywords": [],
   "author": "Joseph Terzi",
