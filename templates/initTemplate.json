@@ -3,11 +3,6 @@
     "title": "New Project",
     "hier": "0",
     "outline": "PLACEHOLDER",
-    "req_type": "PLACEHOLDER",
-    "target_Date": "PLACEHOLDER",
-    "first_estimate": "PLACEHOLDER",
-    "current_estimate": "PLACEHOLDER",
-    "status": "PLACEHOLDER",
     "description": "PLACEHOLDER"
 },
 {
@@ -15,11 +10,6 @@
     "title": "New Object",
     "hier": "0",
     "outline": "PLACEHOLDER",
-    "req_type": "PLACEHOLDER",
-    "target_Date": "PLACEHOLDER",
-    "first_estimate": "PLACEHOLDER",
-    "current_estimate": "PLACEHOLDER",
-    "status": "PLACEHOLDER",
     "description": "PLACEHOLDER"
 }
 ]
