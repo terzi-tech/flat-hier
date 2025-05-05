@@ -1,3 +1,5 @@
+import { flattenTree } from '../utils/flattenTree.js';
+
 /**
  * Promotes a node (and its entire subtree) one level up in the hierarchy
  * @param items - array of nodes with unique_id, title, hier, outline
@@ -50,26 +52,4 @@ function buildTree(items) {
     else nodeMap[parts.slice(0, -1).join('.')].children.push(n);
   });
   return { roots, nodeMap };
-}
-
-/**
- * Utility: flattens a tree back to an array, recalculating outline & hier
- */
-function flattenTree(roots) {
-  const result = [];
-  function recurse(arr, prefix = []) {
-    arr.forEach((n, idx) => {
-      const segment = prefix.length === 0 ? idx : idx + 1;
-      const newOutline = [...prefix, segment].join('.');
-      result.push({
-        ...n, // Spread all fields dynamically
-        hier: prefix.length,
-        outline: newOutline,
-        children: undefined // Remove children to avoid circular references
-      });
-      if (n.children.length) recurse(n.children, [...prefix, segment]);
-    });
-  }
-  recurse(roots);
-  return result;
 }
