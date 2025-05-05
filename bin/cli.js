@@ -14,6 +14,7 @@ import {
   moveUp,
   deleteObject
 } from '../src/index.js';
+import { JSONtoMD, writeMarkdownToFile } from '../src/parsers/JSONtoMD.js';
 
 /* ──────────────────────────────────────────────────────────
    CONFIG & STATE
@@ -302,3 +303,27 @@ process.stdin.on('keypress', async (str, key) => {
    START
 ────────────────────────────────────────────────────────── */
 boot();
+
+// Check for --jsontomd flag
+if (process.argv.includes('--jsontomd')) {
+    (async () => {
+        try {
+            // Load data using DataService
+            const ds = new DataService(treeDataFilePath);
+            await ds.loadData();
+            const data = ds.getData();
+
+            // Convert JSON to Markdown
+            const markdown = JSONtoMD(data);
+
+            // Write Markdown to file
+            const outputFilePath = path.resolve(__dirname, '../output.md');
+            await writeMarkdownToFile(markdown, outputFilePath);
+
+            console.log(`Markdown file generated at: ${outputFilePath}`);
+        } catch (error) {
+            console.error('Error during JSON to Markdown conversion:', error);
+        }
+        process.exit(0);
+    })();
+}
