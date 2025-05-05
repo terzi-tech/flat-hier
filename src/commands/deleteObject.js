@@ -35,7 +35,7 @@ export async function deleteObject(data, selectedIndex) {
   // ──────────────────────────────────────────────────────────
   const hasItemsRemaining = data.length > 0;
   const newSelectedIndex = hasItemsRemaining
-    ? Math.max(0, selectedIndex - 1)
+    ? Math.max(0, selectedIndex)
     : null;
 
   // ──────────────────────────────────────────────────────────

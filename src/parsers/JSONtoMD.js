@@ -34,15 +34,31 @@ export function JSONtoMD(jsonData) {
 
 /**
  * Writes the generated Markdown content to a file.
+ * The file name is derived from the `filepath` in `reqtext_config.json`.
  * @param {string} markdown - The Markdown content to write.
- * @param {string} filePath - The file path to write the Markdown to.
  * @returns {Promise<void>} - A promise that resolves when the file is written.
  */
 import fs from 'fs/promises';
-export async function writeMarkdownToFile(markdown, filePath) {
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+// Fix __dirname issue for ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export async function writeMarkdownToFile(markdown) {
     try {
-        await fs.writeFile(filePath, markdown, 'utf-8');
-        console.log(`Markdown file successfully written to ${filePath}`);
+        // Read the configuration file
+        const configPath = path.resolve(__dirname, '../../reqtext_config.json');
+        const config = JSON.parse(await fs.readFile(configPath, 'utf-8'));
+
+        // Derive the output file name
+        const outputFileName = path.basename(config.filepath, '.json') + '.md';
+        const outputFilePath = path.resolve(__dirname, `../../${outputFileName}`);
+
+        // Write the Markdown content to the file
+        await fs.writeFile(outputFilePath, markdown, 'utf-8');
+        console.log(`Markdown file successfully written to ${outputFilePath}`);
     } catch (error) {
         console.error(`Failed to write Markdown file: ${error.message}`);
         throw error;
