@@ -1,110 +1,58 @@
 [
   {
     "unique_id": "5f04cd49-9c4f-4754-b694-be43620aa84b",
-    "title": "ReqText Core",
+    "title": "flat-json-tree",
     "hier": 0,
     "outline": "0",
-    "req_type": "Project",
-    "description": "ReqText is a text based requirements management tool. It is a git native tool that allows you to manage your requirements, tests and progress in a json data format. It is designed to use git version control for requirement changes and history. \n\nThe json will drive a markdown file that will be used to display the requirements in a readable format. \n\nThe CLI shows the requirements in a tree format. \n\nThe requirements are stored in a flat json structure, no nested objects. Allowing for readability and faster parsing.",
-    "target_Date": "2025-05-17",
-    "first_estimate": "",
-    "current_estimate": "",
-    "status": "In Progress"
-  },
-  {
-    "unique_id": "698adfdd-ade1-46c4-9caa-fe890327adc4",
-    "title": "Improve flattenTree function",
-    "hier": 1,
-    "outline": "0.1",
-    "req_type": "Improvement",
-    "description": "There is a duplication of flattenTree function in the codebase. It should be moved to its own utility file. This has caused some issues for a copilot-driven change, further investigation is needed. Consolidating this function will improve maintainability.",
-    "target_Date": "2025-05-4",
-    "first_estimate": "",
-    "current_estimate": "",
-    "status": "Passed"
+    "description": ""
   },
   {
     "unique_id": "fe03b3eb-1a18-4fe6-a763-ee3a82d83c10",
     "title": "Node.js - Zero Dependencies",
     "hier": 1,
+    "outline": "0.1",
+    "description": ""
+  },
+  {
+    "unique_id": "698adfdd-ade1-46c4-9caa-fe890327adc4",
+    "title": "Improve flattenTree function",
+    "hier": 1,
     "outline": "0.2",
-    "req_type": "Functional",
-    "description": "ReqText is a zero dependencies Node.js application. It does not use any external libraries or frameworks. It is a pure Node.js application. \n\nThe only dependency is the Node.js runtime itself. \n\nThis allows for easy installation and deployment. \n\nIt is designed to be run on any platform that supports Node.js.",
-    "target_Date": "Continuous",
-    "first_estimate": "",
-    "current_estimate": "",
-    "status": "Currently Met"
+    "description": ""
   },
   {
     "unique_id": "2241e4be-e7b0-4f2d-aaae-c7c00d7c26ab",
-    "title": "CLI Commands",
+    "title": "Tree Editor Features",
     "hier": 0,
     "outline": "1",
-    "req_type": "Feature",
-    "description": "This feature allows users to execute various commands within the application. Commands like Add, Delete, Promote, Demote, Move Up, and Move Down are implemented. These commands enable users to manage the hierarchy and structure of requirements effectively.",
-    "target_Date": "2025-05-15",
-    "first_estimate": "",
-    "current_estimate": "",
-    "status": "In Progress"
-  },
-  {
-    "unique_id": "78852ba0-d5f7-45b0-ad5c-94d078b3baea",
-    "title": "Init",
-    "hier": 1,
-    "outline": "1.1",
-    "req_type": "Feature",
-    "description": "This feature will initialize the application with a default configuration and data structure. It is essential for setting up the initial state of the application.",
-    "target_Date": "2025-05-20",
-    "first_estimate": "",
-    "current_estimate": "",
-    "status": "Planned"
+    "description": ""
   },
   {
     "unique_id": "dbf58fa6-8a48-4f9e-a896-79d3c1233bf5",
     "title": "Add Item",
     "hier": 1,
-    "outline": "1.2",
-    "req_type": "Feature",
-    "description": "This feature allows users to add a new item to the requirements tree. The new item will be appended to the selected parent node.",
-    "target_Date": "2025-05-25",
-    "first_estimate": "",
-    "current_estimate": "",
-    "status": "Passed"
+    "outline": "1.1",
+    "description": ""
   },
   {
     "unique_id": "e5a21faf-1ed2-4491-acf0-bb5def45e10c",
     "title": "Delete Item",
     "hier": 1,
-    "outline": "1.3",
-    "req_type": "Feature",
-    "description": "This feature allows users to delete an item from the requirements tree. The selected item and its children will be removed.",
-    "target_Date": "2025-05-30",
-    "first_estimate": "",
-    "current_estimate": "",
-    "status": "Passed"
+    "outline": "1.2",
+    "description": ""
   },
   {
     "unique_id": "2fffb78f-3774-434f-b30a-6533195a915c",
     "title": "Demote Item",
     "hier": 1,
-    "outline": "1.4",
-    "req_type": "Feature",
-    "description": "This feature allows users to demote an item and its children to the previous level in the hierarchy. This is useful for moving items down in the hierarchy and changing their importance. The feature is implemented and functional.",
-    "target_Date": "2025-05-10",
-    "first_estimate": "",
-    "current_estimate": "",
-    "status": "Passed"
+    "outline": "1.3",
+    "description": ""
   },
   {
     "unique_id": "5e26451f-19fd-4554-898d-4e82ffcd7a29",
     "title": "Promote Item",
     "hier": 1,
-    "outline": "1.5",
-    "req_type": "Feature",
-    "description": "This feature allows users to promote an item and its children to the next level in the hierarchy. This is useful for moving items up in the hierarchy and changing their importance. The feature is implemented and functional.",
-    "target_Date": "2025-05-10",
-    "first_estimate": "",
-    "current_estimate": "",
-    "status": "Passed"
+    "outline": "1.4",
+    "description": ""
   }
 ]

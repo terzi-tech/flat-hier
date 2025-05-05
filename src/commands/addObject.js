@@ -10,7 +10,7 @@ import { computeOutlines } from '../index.js';
 // ──────────────────────────────────────────────────────────
 const __filename   = fileURLToPath(import.meta.url);
 const __dirname    = dirname(__filename);
-const templatePath = join(__dirname, '../templates/newObjectTemplate.json');
+const templatePath = join(__dirname, '../../templates/newObjectTemplate.json');
 
 let template;
 try {

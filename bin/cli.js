@@ -25,7 +25,7 @@ const __dirname  = path.dirname(__filename);
 // Load config and derive paths
 const configPath         = path.resolve(__dirname, '../reqtext_config.json');
 const config             = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
-const templateFilePath   = path.resolve(__dirname, `../../templates/${config.templateFileName}`);
+const templateFilePath   = path.resolve(__dirname, `../../${config.templateFileName}`);
 const treeDataFilePath   = path.resolve(__dirname, `../${config.filepath}`);
 
 // Centralized application state

@@ -38,7 +38,7 @@ export function moveDown(items, outlineToMove) {
     const newItems = [];
     function flatten(arr) {
       arr.forEach(n => {
-        newItems.push({ unique_id: n.unique_id, title: n.title, hier: n.hier, outline: n.outline });
+        newItems.push({ ...n, hier: n.hier, outline: n.outline }); // Preserve all fields and update only hier and outline
         if (n.children.length) flatten(n.children);
       });
     }
