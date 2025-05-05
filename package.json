@@ -13,5 +13,8 @@
   "keywords": [],
   "author": "Joseph Terzi",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "ava": "^6.3.0"
+  }
 }
