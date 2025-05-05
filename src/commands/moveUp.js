@@ -35,19 +35,20 @@ export function moveUp(items, outlineToMove) {
     // Attempt swap up
     if (!swapInParentUp(outlineToMove)) return items;
   
-    // Flatten tree back into an array, reassigning outlines
+    // Flatten tree back into an array without recalculating outlines
     const newItems = [];
-    function flatten(arr, prefix = []) {
-      arr.forEach((n, idx) => {
-        const segment = prefix.length === 0 ? idx : idx + 1;
-        const newOutline = [...prefix, segment].join('.');
-        n.outline = newOutline;
-        n.hier = prefix.length;
-        newItems.push({ unique_id: n.unique_id, title: n.title, hier: n.hier, outline: n.outline });
-        if (n.children.length) flatten(n.children, [...prefix, segment]);
+    function flatten(arr) {
+      arr.forEach(n => {
+        newItems.push({ ...n, hier: n.hier, outline: n.outline }); // Use spread operator to retain all fields and update only hier and outline
+        if (n.children.length) flatten(n.children);
       });
     }
-  
+
     flatten(roots);
+
+    // Delete the children property from each item
+    newItems.forEach(item => {
+      delete item.children;
+    });
     return newItems;
   }
