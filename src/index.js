@@ -9,6 +9,7 @@ import { promote } from './core/promote.js';
 import { moveDown } from './core/moveDown.js';
 import { moveUp } from './core/moveUp.js';
 import { deleteObject } from './core/deleteObject.js';
+import initCommand from './cli/commands/init.js';
 
 export { createAsciiTree, 
     renderToConsole, 
@@ -19,5 +20,6 @@ export { createAsciiTree,
     DataService, 
     addObject,
     computeOutlines,
-    deleteObject
+    deleteObject,
+    initCommand
 };

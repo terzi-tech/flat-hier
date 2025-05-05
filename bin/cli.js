@@ -14,6 +14,7 @@ import {
   moveUp,
   deleteObject
 } from '../src/index.js';
+import commandRegistry from '../src/cli/commandRegistry.js';
 
 /* ──────────────────────────────────────────────────────────
    CONFIG & STATE
@@ -81,7 +82,7 @@ function cleanupStaleTemps(dir) {
 
 // e.g. call cleanupStaleTemps(path.dirname(state.ds.filePath)) in boot()
 
-function cleanup() {
+export function cleanup() {
   cleanupStaleTemps(path.dirname(state.ds.filePath));
   console.clear();
   console.log('\nExiting.');
@@ -302,6 +303,13 @@ process.stdin.on('keypress', async (str, key) => {
 /* ──────────────────────────────────────────────────────────
    START
 ────────────────────────────────────────────────────────── */
-boot();
+const [,, command, ...args] = process.argv;
+
+if (commandRegistry[command]) {
+    commandRegistry[command](...args);
+} else {
+    console.error(`Unknown command: ${command}`);
+    console.log('Available commands: init');
+}
 
 
