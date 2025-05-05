@@ -44,12 +44,16 @@ export async function addObject(data, selectedIndex) {
 
   // 2. Prepare new object based on external template
   const parentHier = data[selectedIndex].hier;
+  // Get Current Date Time
+  const currentDateTime = new Date().toISOString(); // Format date-time
   const newObject  = {
     ...template,                      // load defaults from JSON
-    unique_id: crypto.randomUUID(),  // override with fresh UUID
+    unique_id: '',                    // placeholder for unique ID
     hier:      parentHier,           // inherit parent's hierarchy
     outline:   'pending'             // placeholder until computeOutlines runs
   };
+  const uniqueId = `${currentDateTime}-${crypto.randomBytes(4).toString('hex')}`; // Prepend date-time
+  newObject.unique_id = uniqueId;
 
   // 3. Insert and update selection
   const insertPos = selectedIndex + 1;

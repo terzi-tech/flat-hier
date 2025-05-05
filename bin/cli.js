@@ -22,8 +22,8 @@ import { JSONtoMD, writeMarkdownToFile } from '../src/parsers/JSONtoMD.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname  = path.dirname(__filename);
 
-// Load config and derive paths
-const configPath         = path.resolve(__dirname, '../reqtext_config.json');
+// Load config and derive paths-
+const configPath         = path.resolve(__dirname, '../flat-json-tree.config.json');
 const config             = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
 const templateFilePath   = path.resolve(__dirname, `../../${config.templateFileName}`);
 const treeDataFilePath   = path.resolve(__dirname, `../${config.filepath}`);
@@ -67,8 +67,8 @@ function showHelp() {
   console.log('  ESC    Exit / Cancel edit');
   console.log('  Ctrl+N Add new object');
   console.log('  DEL    Delete object');
-  console.log('  TAB    Demote');
-  console.log('  Shift+TAB Promote');
+  console.log('  →     Demote');
+  console.log('  ←     Promote');
 }
 
 function cleanupStaleTemps(dir) {
@@ -244,8 +244,8 @@ const keyMap = {
     return: startEdit,
     '\u000e': addObjectHandler, // Ctrl+N
     delete: deleteObjectHandler,
-    tab:    demoteHandler,
-    shiftTab: promoteHandler
+    right:  demoteHandler,      // Changed from tab to right arrow
+    left:   promoteHandler      // Changed from shiftTab to left arrow
   },
   edit: {
     escape: cancelEdit,
@@ -264,8 +264,9 @@ process.stdin.on('keypress', async (str, key) => {
   // Normalize key id
   const id = key.sequence === '\u001b[A' ? 'up'
            : key.sequence === '\u001b[B' ? 'down'
+           : key.sequence === '\u001b[C' ? 'right' // Right arrow
+           : key.sequence === '\u001b[D' ? 'left'  // Left arrow
            : key.sequence === '\u007f'   ? 'delete'
-           : key.sequence === '\u001b[Z' ? 'shiftTab'
            : key.name || str;
 
   // Dispatch control-N separately
