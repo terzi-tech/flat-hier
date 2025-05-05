@@ -1,0 +1,4 @@
+# Exclude the .git folder and other unnecessary files
+.git
+node_modules
+*.log

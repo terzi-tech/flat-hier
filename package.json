@@ -1,0 +1,17 @@
+{
+  "name": "terminal_study",
+  "version": "0.1.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node bin/cli.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "flat-json-tree": "./bin/cli.js"
+  },
+  "keywords": [],
+  "author": "Joseph Terzi",
+  "license": "ISC",
+  "description": ""
+}
