@@ -38,12 +38,17 @@ export function moveDown(items, outlineToMove) {
     const newItems = [];
     function flatten(arr) {
       arr.forEach(n => {
-        newItems.push({ ...n, hier: n.hier, outline: n.outline }); // Preserve all fields and update only hier and outline
+        newItems.push({ ...n, hier: n.hier, outline: n.outline }); // Use spread operator to retain all fields and update only hier and outline
         if (n.children.length) flatten(n.children);
       });
     }
 
     flatten(roots);
+
+    // Delete the children property from each item
+    newItems.forEach(item => {
+      delete item.children;
+    });
     return  newItems; // Return an object with the updated items and selectedIndex
 }
 
