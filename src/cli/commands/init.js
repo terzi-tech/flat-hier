@@ -3,7 +3,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import readline from 'readline';
 import { state, cleanup } from '../../../bin/cli.js';
-// import generate uniqie ids from 
+import { generateUniqueId } from '../../index.js';
 
 const initCommand = () => {
     const __filename = fileURLToPath(import.meta.url);
@@ -56,8 +56,15 @@ const initCommand = () => {
         }
 
         const template = fs.readFileSync(templatePath, 'utf-8');
-        fs.writeFileSync(outputPath, template, 'utf-8');
-        console.log(`${finalFileName} has been initialized.`);
+        const parsedTemplate = JSON.parse(template);
+
+        // Generate unique IDs for all items in the template
+        parsedTemplate.forEach(item => {
+            item.unique_id = generateUniqueId();
+        });
+
+        fs.writeFileSync(outputPath, JSON.stringify(parsedTemplate, null, 4), 'utf-8');
+        console.log(`${finalFileName} has been initialized with updated unique IDs.`);
 
         // Update the config file
         updateConfigFile(finalFileName);
