@@ -34,14 +34,16 @@ const initCommand = () => {
         });
     };
 
+    // Fix the `updateConfigFile` function to ensure it writes absolute paths correctly
     const updateConfigFile = (fileName) => {
-        const configPath = path.resolve(process.cwd(), 'flat-json-tree.config.json');
+        const configPath = path.resolve(process.cwd(), 'node_modules/flat-json-tree/flat-json-tree.config.json');
+        const absoluteFilePath = path.resolve(process.cwd(), fileName);
 
         if (fs.existsSync(configPath)) {
             const config = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
-            config.filepath = `./${fileName}`;
+            config.filepath = absoluteFilePath; // Ensure absolute path is written
             fs.writeFileSync(configPath, JSON.stringify(config, null, 4), 'utf-8');
-            console.log(`Updated config file: ${configPath}`);
+            console.log(`Updated config file with absolute path: ${absoluteFilePath}`);
         } else {
             console.warn('Warning: Config file not found. Skipping config update.');
         }

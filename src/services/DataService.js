@@ -3,7 +3,7 @@ import path from 'path';
 
 class DataService {
     constructor(filePath) {
-        this.filePath = filePath;
+        this.filePath = path.resolve(process.cwd(), filePath);
         this.data = null;
     }
 
