@@ -30,6 +30,19 @@ const initCommand = () => {
         });
     };
 
+    const updateConfigFile = (fileName) => {
+        const configPath = path.resolve(process.cwd(), 'flat-json-tree.config.json');
+
+        if (fs.existsSync(configPath)) {
+            const config = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
+            config.filepath = `./${fileName}`;
+            fs.writeFileSync(configPath, JSON.stringify(config, null, 4), 'utf-8');
+            console.log(`Updated config file: ${configPath}`);
+        } else {
+            console.warn('Warning: Config file not found. Skipping config update.');
+        }
+    };
+
     const proceedWithFileName = (fileName) => {
         // Ensure the file name ends with .json
         const finalFileName = fileName.endsWith('.json') ? fileName : `${fileName}.json`;
@@ -43,6 +56,10 @@ const initCommand = () => {
         const template = fs.readFileSync(templatePath, 'utf-8');
         fs.writeFileSync(outputPath, template, 'utf-8');
         console.log(`${finalFileName} has been initialized.`);
+
+        // Update the config file
+        updateConfigFile(finalFileName);
+
         process.exit(0);
     };
 

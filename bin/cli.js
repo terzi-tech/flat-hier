@@ -309,7 +309,13 @@ if (commandRegistry[command]) {
     commandRegistry[command](...args);
 } else {
     console.error(`Unknown command: ${command}`);
-    console.log('Available commands: init');
+    console.log('Available commands: init, edit');
+    // Close the process if no command is found
+    process.exit(1);
 }
+
+commandRegistry.edit = () => {
+    boot();
+};
 
 
