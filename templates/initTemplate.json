@@ -2,14 +2,14 @@
     "unique_id": "PLACEHOLDER",
     "title": "New Project",
     "hier": "0",
-    "outline": "PLACEHOLDER",
+    "outline": "0",
     "description": "PLACEHOLDER"
 },
 {
     "unique_id": "PLACEHOLDER",
     "title": "New Object",
     "hier": "0",
-    "outline": "PLACEHOLDER",
+    "outline": "1",
     "description": "PLACEHOLDER"
 }
 ]

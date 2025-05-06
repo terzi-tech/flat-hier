@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import readline from 'readline';
+import { state } from '../../../bin/cli.js';
 
 const initCommand = () => {
     const __filename = fileURLToPath(import.meta.url);
@@ -22,7 +23,7 @@ const initCommand = () => {
         // Clear the console before prompting
         console.clear();
 
-        rl.question('Please enter a name for the file (default: flat-json-tree.json): ', (answer) => {
+        rl.question('File Path (default: flat-json-tree.json): ', (answer) => {
             rl.close();
             // Ensure the terminal cursor is reset properly
             process.stdout.write('\n');
@@ -59,6 +60,10 @@ const initCommand = () => {
 
         // Update the config file
         updateConfigFile(finalFileName);
+
+        // Set state.mode to 'edit'
+        state.mode = 'edit';
+        console.log('State mode set to edit.');
 
         process.exit(0);
     };

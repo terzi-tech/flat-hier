@@ -29,7 +29,7 @@ const templateFilePath   = path.resolve(__dirname, `../../${config.templateFileN
 const treeDataFilePath   = path.resolve(__dirname, `../${config.filepath}`);
 
 // Centralized application state
-const state = {
+export const state = {
   ds:      new DataService(treeDataFilePath),
   data:    [],
   selectedIndex: 1,
@@ -40,8 +40,9 @@ const state = {
 /* ──────────────────────────────────────────────────────────
    BOOTSTRAP & RENDERING
 ────────────────────────────────────────────────────────── */
-async function boot() {
+export async function boot() {
   try {
+    console.log('Loading JSON data...');
     await state.ds.loadData();
     state.data = state.ds.getData();
     render();
@@ -315,6 +316,7 @@ if (commandRegistry[command]) {
 }
 
 commandRegistry.edit = () => {
+  console.log('Starting edit mode...');
     boot();
 };
 

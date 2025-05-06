@@ -1,10 +1,9 @@
 import initCommand from './commands/init.js';
+import { boot } from '../../bin/cli.js';
 
 const commandRegistry = {
     init: initCommand,
-    edit: () => {
-        // The `edit` command registration is now handled in `cli.js`.
-    }
+    editor: boot,
 };
 
 export default commandRegistry;
