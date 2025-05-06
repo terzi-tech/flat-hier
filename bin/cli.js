@@ -93,6 +93,7 @@ export function cleanup() {
   process.exit(0);
 }
 
+
 /* ──────────────────────────────────────────────────────────
    NAVIGATION & SELECTION
 ────────────────────────────────────────────────────────── */
@@ -261,45 +262,51 @@ process.stdin.resume();
 process.stdin.setEncoding('utf8');
 process.stdout.write('\x1B[?25l'); // hide cursor on start
 
-process.stdin.on('keypress', async (str, key) => {
-  // Normalize key id
-  const id = key.sequence === '\u001b[A' ? 'up'
-           : key.sequence === '\u001b[B' ? 'down'
-           : key.sequence === '\u001b[C' ? 'right' // Right arrow
-           : key.sequence === '\u001b[D' ? 'left'  // Left arrow
-           : key.sequence === '\u007f'   ? 'delete'
-           : key.name || str;
+let keypressActive = false; // Flag to ensure single listener
 
-  // Dispatch control-N separately
-  if (key.ctrl && key.name === 'n') {
-    return addObjectHandler();
-  }
+if (!keypressActive) {
+    process.stdin.on('keypress', async (str, key) => {
 
-  // Shift+Arrow handlers
-  if (key.shift && key.name === 'down') {
-    return moveDownHandler();
-  }
-  if (key.shift && key.name === 'up') {
-    return moveUpHandler();
-  }
+        // Normalize key id
+        const id = key.sequence === '\u001b[A' ? 'up'
+                 : key.sequence === '\u001b[B' ? 'down'
+                 : key.sequence === '\u001b[C' ? 'right' // Right arrow
+                 : key.sequence === '\u001b[D' ? 'left'  // Left arrow
+                 : key.sequence === '\u007f'   ? 'delete'
+                 : key.name || str;
 
-  // Mode-specific mapping
-  const handler = keyMap[state.mode]?.[id];
-  if (handler) {
-    return handler();
-  }
+        // Dispatch control-N separately
+        if (key.ctrl && key.name === 'n') {
+            return addObjectHandler();
+        }
 
-  // In-edit typing
-  if (state.mode === 'edit' && key.sequence && !key.ctrl && !key.meta) {
-    if (key.name === 'backspace') {
-      state.editBuffer = state.editBuffer.slice(0, -1);
-      process.stdout.write('\b \b');
-    } else {
-      state.editBuffer += str;
-      process.stdout.write(str);
-    }
-  }
-});
+        // Shift+Arrow handlers
+        if (key.shift && key.name === 'down') {
+            return moveDownHandler();
+        }
+        if (key.shift && key.name === 'up') {
+            return moveUpHandler();
+        }
+
+        // Mode-specific mapping
+        const handler = keyMap[state.mode]?.[id];
+        if (handler) {
+            return handler();
+        }
+
+        // In-edit typing
+        if (state.mode === 'edit' && key.sequence && !key.ctrl && !key.meta) {
+            if (key.name === 'backspace') {
+                state.editBuffer = state.editBuffer.slice(0, -1);
+                process.stdout.write('\b \b');
+            } else {
+                state.editBuffer += str;
+                process.stdout.write(str);
+            }
+        }
+    });
+    keypressActive = true; // Mark listener as active
+}
 
 /* ──────────────────────────────────────────────────────────
    START

@@ -3,7 +3,7 @@ import crypto from 'crypto';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
-import { computeOutlines } from '../index.js';
+import { generateUniqueId, computeOutlines } from '../index.js';
 
 // ──────────────────────────────────────────────────────────
 // Load template JSON via fs to avoid the experimental JSON-module warning
@@ -52,7 +52,7 @@ export async function addObject(data, selectedIndex) {
     hier:      parentHier,           // inherit parent's hierarchy
     outline:   'pending'             // placeholder until computeOutlines runs
   };
-  const uniqueId = `${currentDateTime}-${crypto.randomBytes(4).toString('hex')}`; // Prepend date-time
+  const uniqueId = generateUniqueId();
   newObject.unique_id = uniqueId;
 
   // 3. Insert and update selection

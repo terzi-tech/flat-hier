@@ -10,6 +10,7 @@ import { moveDown } from './core/moveDown.js';
 import { moveUp } from './core/moveUp.js';
 import { deleteObject } from './core/deleteObject.js';
 import initCommand from './cli/commands/init.js';
+import { generateUniqueId } from './utils/generateUniqueId.js';
 
 export { createAsciiTree, 
     renderToConsole, 
@@ -21,5 +22,6 @@ export { createAsciiTree,
     addObject,
     computeOutlines,
     deleteObject,
-    initCommand
+    initCommand,
+    generateUniqueId
 };

@@ -1,15 +1,23 @@
-[{
+[
+  {
     "unique_id": "PLACEHOLDER",
     "title": "New Project",
     "hier": "0",
-    "outline": "PLACEHOLDER",
+    "outline": "0",
     "description": "PLACEHOLDER"
-},
-{
+  },
+  {
     "unique_id": "PLACEHOLDER",
     "title": "New Object",
     "hier": "0",
-    "outline": "PLACEHOLDER",
+    "outline": "1",
     "description": "PLACEHOLDER"
-}
+  },
+  {
+    "unique_id": "2025-05-06T01:48:11.982Z-459f19a9",
+    "title": "New Object",
+    "hier": "0",
+    "outline": "2",
+    "description": "PLACEHOLDER"
+  }
 ]

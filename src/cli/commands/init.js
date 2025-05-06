@@ -2,7 +2,8 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import readline from 'readline';
-import { state } from '../../../bin/cli.js';
+import { state, cleanup } from '../../../bin/cli.js';
+// import generate uniqie ids from 
 
 const initCommand = () => {
     const __filename = fileURLToPath(import.meta.url);
@@ -63,7 +64,8 @@ const initCommand = () => {
 
         // Set state.mode to 'edit'
         state.mode = 'edit';
-        console.log('State mode set to edit.');
+
+        cleanup(); // Ensure cleanup is called at the end of the init command
 
         process.exit(0);
     };
