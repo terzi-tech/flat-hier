@@ -23,7 +23,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname  = path.dirname(__filename);
 
 // Update the configPath to point to the configuration file in the package directory
-const configPath = path.resolve(__dirname, '../flat-json-tree.config.json');
+const configPath = path.resolve(__dirname, '../flat-hier.config.json');
 const config = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
 
 const templateFilePath = path.resolve(process.cwd(), config.templateFileName);

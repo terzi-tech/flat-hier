@@ -18,7 +18,7 @@ class DataService {
         } catch (error) {
             if (error.code === 'ENOENT') {
                 const fileName = path.basename(this.filePath);
-                console.error(`"${fileName}" does not exist. Check flat-json-tree.config.json or run init command.`);
+                console.error(`"${fileName}" does not exist. Check flat-hier.config.json or run init command.`);
             } else {
                 console.error(`Failed to load data from ${this.filePath}.`);
             }

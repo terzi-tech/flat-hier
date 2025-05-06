@@ -1,5 +1,5 @@
 {
-  "name": "flat-json-tree",
+  "name": "flat-hier",
   "version": "0.1.0",
   "main": "index.js",
   "type": "module",
@@ -12,7 +12,7 @@
   },
   "keywords": [],
   "author": "Joseph Terzi",
-  "license": "ISC",
+  "license": "MIT",
   "description": "",
   "devDependencies": {
     "ava": "^6.3.0"
