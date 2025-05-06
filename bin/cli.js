@@ -74,6 +74,11 @@ function showHelp() {
 }
 
 function cleanupStaleTemps(dir) {
+  if (!fs.existsSync(dir)) {
+    console.warn(`Directory does not exist: ${dir}`);
+    return;
+  }
+
   fs.readdirSync(dir)
     .filter(f => f.endsWith('.tmp'))
     .forEach(tmp => {

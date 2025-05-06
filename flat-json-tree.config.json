@@ -1,4 +1,4 @@
 {
-    "filepath": "/home/mike-diker/github_repos/test_npm/test_2.json",
+    "filepath": "./flat-json-tree.json",
     "templateFileName": "newObjectTemplate.json"
 }

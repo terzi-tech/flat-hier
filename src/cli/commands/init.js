@@ -9,6 +9,7 @@ const initCommand = () => {
     const __filename = fileURLToPath(import.meta.url);
     const __dirname = path.dirname(__filename);
     const templatePath = path.resolve(__dirname, '../../../templates/initTemplate.json');
+    const configPath = path.resolve(__dirname, '../../../flat-json-tree.config.json'); // Updated to dynamically resolve the config file path
 
     // Parse command-line arguments
     const args = process.argv.slice(2);
@@ -34,16 +35,15 @@ const initCommand = () => {
         });
     };
 
-    // Fix the `updateConfigFile` function to ensure it writes absolute paths correctly
+    // Fix the `updateConfigFile` function to ensure it writes relative paths correctly
     const updateConfigFile = (fileName) => {
-        const configPath = path.resolve(process.cwd(), 'node_modules/flat-json-tree/flat-json-tree.config.json');
-        const absoluteFilePath = path.resolve(process.cwd(), fileName);
+        const relativeFilePath = path.relative(process.cwd(), path.resolve(process.cwd(), fileName)); // Calculate relative path
 
         if (fs.existsSync(configPath)) {
             const config = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
-            config.filepath = absoluteFilePath; // Ensure absolute path is written
+            config.filepath = `./${relativeFilePath}`; // Save as relative path
             fs.writeFileSync(configPath, JSON.stringify(config, null, 4), 'utf-8');
-            console.log(`Updated config file with absolute path: ${absoluteFilePath}`);
+            console.log(`Updated config file with relative path: ./${relativeFilePath}`);
         } else {
             console.warn('Warning: Config file not found. Skipping config update.');
         }
@@ -52,7 +52,7 @@ const initCommand = () => {
     const proceedWithFileName = (fileName) => {
         // Ensure the file name ends with .json
         const finalFileName = fileName.endsWith('.json') ? fileName : `${fileName}.json`;
-        const outputPath = path.resolve(process.cwd(), finalFileName);
+        const outputPath = path.join(process.cwd(), finalFileName); // Use relative path
 
         if (fs.existsSync(outputPath)) {
             console.error(`Error: ${finalFileName} already exists.`);
@@ -70,7 +70,7 @@ const initCommand = () => {
         fs.writeFileSync(outputPath, JSON.stringify(parsedTemplate, null, 4), 'utf-8');
         console.log(`${finalFileName} has been initialized with updated unique IDs.`);
 
-        // Update the config file
+        // Update the config file with a relative path
         updateConfigFile(finalFileName);
 
         // Set state.mode to 'edit'
