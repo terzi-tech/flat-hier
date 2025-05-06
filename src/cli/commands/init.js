@@ -26,9 +26,11 @@ const initCommand = () => {
 
         rl.question('File Path (default: flat-json-tree.json): ', (answer) => {
             rl.close();
+            // Replace spaces with underscores in the file name
+            const sanitizedAnswer = answer.replace(/\s+/g, '_');
             // Ensure the terminal cursor is reset properly
             process.stdout.write('\n');
-            callback(answer || 'flat-json-tree.json');
+            callback(sanitizedAnswer || 'flat-json-tree.json');
         });
     };
 
