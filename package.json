@@ -1,5 +1,5 @@
 {
-  "name": "terminal_study",
+  "name": "flat-json-tree",
   "version": "0.1.0",
   "main": "index.js",
   "type": "module",
@@ -14,7 +14,7 @@
   "author": "Joseph Terzi",
   "license": "ISC",
   "description": "",
-  "dependencies": {
+  "devDependencies": {
     "ava": "^6.3.0"
   }
 }

@@ -22,11 +22,12 @@ import commandRegistry from '../src/cli/commandRegistry.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname  = path.dirname(__filename);
 
-// Load config and derive paths-
-const configPath         = path.resolve(__dirname, '../flat-json-tree.config.json');
-const config             = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
-const templateFilePath   = path.resolve(__dirname, `../../${config.templateFileName}`);
-const treeDataFilePath   = path.resolve(__dirname, `../${config.filepath}`);
+// Update the configPath to point to the configuration file in the package directory
+const configPath = path.resolve(__dirname, '../flat-json-tree.config.json');
+const config = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
+
+const templateFilePath = path.resolve(process.cwd(), config.templateFileName);
+const treeDataFilePath = path.resolve(process.cwd(), config.filepath);
 
 // Centralized application state
 export const state = {
