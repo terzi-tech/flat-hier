@@ -17,13 +17,12 @@ class DataService {
             this.data = JSON.parse(fileContent);
         } catch (error) {
             if (error.code === 'ENOENT') {
-                const fileName = path.basename(this.filePath);
-                console.error(`"${fileName}" does not exist. Check flat-hier.config.json or run init command.`);
+                throw new Error(`File ${this.filePath} does not exist. Check flat-hier.config.json or run init command.`);
             } else {
                 console.error(`Failed to load data from ${this.filePath}.`);
             }
             // Suppress the re-thrown error to only display the custom message
-            process.exit(1);
+            throw error;
         }
     }
 
