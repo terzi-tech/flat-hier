@@ -1,4 +1,4 @@
-import test from 'ava';
+import { describe, it, beforeEach, afterEach, expect } from 'vitest';
 import fs from 'fs/promises';
 import path from 'path';
 import DataService from '../src/services/DataService.js';
@@ -21,47 +21,50 @@ const mockData = [
     }
 ];
 
-test.beforeEach(async () => {
-    // Write mock data to the correct test file path before each test
-    await fs.writeFile(testFilePath, JSON.stringify(mockData, null, 2), 'utf-8');
-});
+describe('DataService', () => {
+    beforeEach(async () => {
+        // Write mock data to the correct test file path before each test
+        await fs.writeFile(testFilePath, JSON.stringify(mockData, null, 2), 'utf-8');
+    });
 
-test.afterEach(async () => {
-    // Remove the test file after each test
-    // fs.unlink(testFilePath).catch(() => {});
-});
+    afterEach(async () => {
+        // Remove the test file after each test
+        fs.unlink(testFilePath).catch(() => {});
+    });
 
-test('loadData should load data from a valid file', async t => {
-    const dataService = new DataService('test/test-data.json');
-    await dataService.loadData();
-    t.deepEqual(dataService.getData(), mockData);
-});
+    it('loadData should load data from a valid file', async () => {
+        const dataService = new DataService('test/test-data.json');
+        await dataService.loadData();
+        expect(dataService.getData()).toEqual(mockData);
+    });
 
-test('loadData should throw an error if the file does not exist', async t => {
-    const invalidFilePath = path.resolve('non-existent.json');
-    const dataService = new DataService(invalidFilePath);
-    const error = await t.throwsAsync(() => dataService.loadData());
-    t.is(error.message, `File ${invalidFilePath} does not exist. Check flat-hier.config.json or run init command.`);
-});
+    it('loadData should throw an error if the file does not exist', async () => {
+        const invalidFilePath = path.resolve('non-existent.json');
+        const dataService = new DataService(invalidFilePath);
+        await expect(dataService.loadData()).rejects.toThrow(
+            `File ${invalidFilePath} does not exist. Check flat-hier.config.json or run init command.`
+        );
+    });
 
-test('saveData should save data to a file', async t => {
-    const dataService = new DataService('test/test-data.json');
-    dataService.setData(mockData);
-    await dataService.saveData();
+    it('saveData should save data to a file', async () => {
+        const dataService = new DataService('test/test-data.json');
+        dataService.setData(mockData);
+        await dataService.saveData();
 
-    const savedContent = JSON.parse(await fs.readFile(testFilePath, 'utf-8'));
-    t.deepEqual(savedContent, mockData);
-});
+        const savedContent = JSON.parse(await fs.readFile(testFilePath, 'utf-8'));
+        expect(savedContent).toEqual(mockData);
+    });
 
-test('getData should return the current in-memory data', t => {
-    const dataService = new DataService('test/test-data.json');
-    dataService.setData(mockData);
-    t.deepEqual(dataService.getData(), mockData);
-});
+    it('getData should return the current in-memory data', () => {
+        const dataService = new DataService('test/test-data.json');
+        dataService.setData(mockData);
+        expect(dataService.getData()).toEqual(mockData);
+    });
 
-test('setData should update the in-memory data', t => {
-    const dataService = new DataService('test/test-data.json');
-    const newData = [{ "unique_id": "NEW_ID", "title": "Updated Object" }];
-    dataService.setData(newData);
-    t.deepEqual(dataService.getData(), newData);
+    it('setData should update the in-memory data', () => {
+        const dataService = new DataService('test/test-data.json');
+        const newData = [{ "unique_id": "NEW_ID", "title": "Updated Object" }];
+        dataService.setData(newData);
+        expect(dataService.getData()).toEqual(newData);
+    });
 });
