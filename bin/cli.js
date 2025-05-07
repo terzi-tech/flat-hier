@@ -191,7 +191,20 @@ async function persist(updatedData) {
    OBJECT OPERATIONS
 ────────────────────────────────────────────────────────── */
 async function addObjectHandler() {
-  const res = await addObject(state.data, state.selectedIndex, templateFilePath);
+  // Get unique id from the selected item
+  if (!state.data.length) return console.log('No items to add to.');
+  if (state.selectedIndex < 0 || state.selectedIndex >= state.data.length) {
+    console.error('Selected index is out of bounds.');
+    return;
+  }
+  // Get the outline number of the selected item
+  const outlineNumber = state.data[state.selectedIndex]?.outline;
+  if (!outlineNumber) {
+    console.error('No valid outline number found for the selected index.');
+    return;
+  }
+
+  const res = await addObject(state.data, outlineNumber);
   if (res) {
     state.data = res.data;
     state.selectedIndex = res.selectedIndex;
