@@ -215,17 +215,18 @@ async function addObjectHandler() {
 }
 
 async function deleteObjectHandler() {
-  if (!state.data.length) return console.log('No items to delete.');
-  const res = await deleteObject(state.data, state.selectedIndex);
-  if (res) {
-    state.data = res.data;
-    // Find Index with the unique id
-    const uniqueId = state.data[state.selectedIndex]?.unique_id;
-    if (!uniqueId) {
-      console.error('No valid unique ID found for the selected index.');
+    // Get unique id from the selected item
+    const selectedItem = state.data[state.selectedIndex];
+    if (!selectedItem) {
+      console.error('No valid item selected.');
       return;
     }
-    state.selectedIndex = uniqueId;
+    // Get the outline number of the selected item
+    const outlineNumber = state.data[state.selectedIndex]?.outline;
+  const res = await deleteObject(state.data, outlineNumber);
+  if (res) {
+    state.data = res.data;
+
     await persist(state.data);
     render();
     console.log('Item deleted.');

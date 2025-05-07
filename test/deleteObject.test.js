@@ -13,15 +13,15 @@ beforeAll(() => {
 });
 
 describe('deleteObject', () => {
-  it('should delete the object at the specified index and update the selection', () => {
+  it('should delete the object with the specified outline number and update the selection', () => {
     const data = [
       { outline: '1', hier: 'root' },
       { outline: '1.1', hier: 'child' },
       { outline: '1.2', hier: 'child' }
     ];
-    const selectedIndex = 1;
+    const outlineNumber = '1.1';
 
-    const result = deleteObject(data, selectedIndex);
+    const result = deleteObject(data, outlineNumber);
 
     expect(result).toBeDefined();
     expect(result.data).toHaveLength(2);
@@ -32,20 +32,20 @@ describe('deleteObject', () => {
 
   it('should return null for selectedIndex if the last item is deleted', () => {
     const data = [{ outline: '1', hier: 'root' }];
-    const selectedIndex = 0;
+    const outlineNumber = '1';
 
-    const result = deleteObject(data, selectedIndex);
+    const result = deleteObject(data, outlineNumber);
 
     expect(result).toBeDefined();
     expect(result.data).toHaveLength(0);
     expect(result.selectedIndex).toBeNull();
   });
 
-  it('should return void if the selectedIndex is invalid', () => {
+  it('should return void if the outline number is invalid', () => {
     const data = [{ outline: '1', hier: 'root' }];
-    const selectedIndex = -1;
+    const outlineNumber = '2';
 
-    const result = deleteObject(data, selectedIndex);
+    const result = deleteObject(data, outlineNumber);
 
     expect(result).toBeUndefined();
   });
@@ -55,9 +55,9 @@ describe('deleteObject', () => {
       { outline: '1', hier: 'root' },
       { outline: '1.1', hier: 'child' }
     ];
-    const selectedIndex = 0;
+    const outlineNumber = '1';
 
-    deleteObject(data, selectedIndex);
+    deleteObject(data, outlineNumber);
 
     expect(compute.computeOutlines).toHaveBeenCalled();
   });
