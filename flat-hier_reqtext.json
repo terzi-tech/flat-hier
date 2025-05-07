@@ -38,7 +38,39 @@
     "hier": 0,
     "outline": "1",
     "status": "Passing",
-    "description": "The source of truth for the architecture is a flat json file. The hierarchy is based on a level value, `hier`, which is a int to determine what level the node is in the hierarchy. The ordering is based on the position in the json. The outline numbering is calcuated base on the hier and the postion."
+    "description": "The source of truth for the architecture is a flat json file. The hierarchy is based on a level value, `hier`, which is a int to determine what level the node is in the hierarchy. The ordering is based on the position in the json. The outline numbering is calculated base on the hier and the position."
+  },
+  {
+    "unique_id": "2025-05-07T18:33:17.163Z-4db7c186",
+    "title": "hier field",
+    "hier": 1,
+    "outline": "1.1",
+    "status": "PLACEHOLDER",
+    "description": "PLACEHOLDER"
+  },
+  {
+    "unique_id": "2025-05-07T18:33:32.675Z-1c5a0200",
+    "title": "outline field",
+    "hier": 1,
+    "outline": "1.2",
+    "status": "PLACEHOLDER",
+    "description": "hierarchical "
+  },
+  {
+    "unique_id": "2025-05-07T18:33:57.755Z-9d836cee",
+    "title": "unique id",
+    "hier": 1,
+    "outline": "1.3",
+    "status": "Pass",
+    "description": "All items have a generated unique id based on the current date time and a UUID."
+  },
+  {
+    "unique_id": "2025-05-07T18:33:54.627Z-7f5ad4e7",
+    "title": "project id",
+    "hier": 1,
+    "outline": "1.4",
+    "status": "Accepted",
+    "description": "A project id is generated based on the order added in the project. This id remains unchanged inside the project but is not unique across projects. It is used to track items for branches and development in a user friendly way.\n\nThe outline number can change so it is not used for branch names, and the unique id is not user friendly. The project id is used to track the item in the project."
   },
   {
     "unique_id": "2025-05-07T14:46:35.680Z-24633d65",
