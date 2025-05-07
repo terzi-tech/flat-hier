@@ -6,9 +6,8 @@ import { flattenTree } from '../utils/flattenTree.js';
  * @param outlineToPromote - the outline string of the node to promote
  * @returns new flattened array with updated hier and outline
  */
-export function promote(data, selectedIndex) {
+export function promote(data, outlineToPromote) {
 
-    const outlineToPromote = data[selectedIndex]?.outline;
 
     if (!outlineToPromote) {
         return data; // Return unchanged data if no valid selection
