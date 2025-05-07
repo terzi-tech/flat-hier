@@ -76,23 +76,15 @@
     "title": "CLI Editor",
     "hier": 0,
     "outline": "3",
-    "status": "PLACEHOLDER",
-    "description": "PLACEHOLDER"
+    "status": "In Dev",
+    "description": "CLI Tree view editor."
   },
   {
     "unique_id": "2025-05-07T15:14:15.153Z-6621e202",
     "title": "Up/Down Arrows - Navigate Items",
     "hier": 1,
     "outline": "3.1",
-    "status": "PLACEHOLDER",
-    "description": "PLACEHOLDER"
-  },
-  {
-    "unique_id": "2025-05-07T15:14:37.322Z-39de1fb3",
-    "title": "BUG: Moving past children messes up selected index",
-    "hier": 2,
-    "outline": "3.1.1",
-    "status": "PLACEHOLDER",
+    "status": "Pass",
     "description": "PLACEHOLDER"
   },
   {
@@ -100,7 +92,7 @@
     "title": "Ctrl+N Add Item",
     "hier": 1,
     "outline": "3.2",
-    "status": "PLACEHOLDER",
+    "status": "Pass",
     "description": "PLACEHOLDER"
   },
   {
@@ -108,31 +100,39 @@
     "title": "BUG: Adding Item Enter Title Appears Above Index",
     "hier": 2,
     "outline": "3.2.1",
-    "status": "PLACEHOLDER",
-    "description": "PLACEHOLDER"
-  },
-  {
-    "unique_id": "2025-05-07T15:12:44.517Z-a02799ea",
-    "title": "Delete - Delete Selected Item",
-    "hier": 1,
-    "outline": "3.3",
-    "status": "PLACEHOLDER",
-    "description": "PLACEHOLDER"
-  },
-  {
-    "unique_id": "2025-05-07T15:13:56.552Z-65805aa4",
-    "title": "Right/Left Arrows - Demote/Promote",
-    "hier": 1,
-    "outline": "3.4",
-    "status": "PLACEHOLDER",
+    "status": "Triaged",
     "description": "PLACEHOLDER"
   },
   {
     "unique_id": "2025-05-07T15:15:17.700Z-cbffcc07",
     "title": "Shift+Up/Down Arrows - Move Items",
     "hier": 1,
+    "outline": "3.3",
+    "status": "Pass",
+    "description": "PLACEHOLDER"
+  },
+  {
+    "unique_id": "2025-05-07T15:14:37.322Z-39de1fb3",
+    "title": "BUG: Moving past children messes up selected index",
+    "hier": 2,
+    "outline": "3.3.1",
+    "status": "Pass",
+    "description": "PLACEHOLDER"
+  },
+  {
+    "unique_id": "2025-05-07T15:12:44.517Z-a02799ea",
+    "title": "Delete - Delete Selected Item",
+    "hier": 1,
+    "outline": "3.4",
+    "status": "Pass",
+    "description": "PLACEHOLDER"
+  },
+  {
+    "unique_id": "2025-05-07T15:13:56.552Z-65805aa4",
+    "title": "Right/Left Arrows - Demote/Promote",
+    "hier": 1,
     "outline": "3.5",
-    "status": "PLACEHOLDER",
+    "status": "Pass",
     "description": "PLACEHOLDER"
   }
 ]
