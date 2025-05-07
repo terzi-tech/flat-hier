@@ -20,7 +20,7 @@ export async function deleteObject(data, selectedIndex) {
 
   if (isIndexInvalid) {
     console.error(
-      '⚠️  Invalid selection. Please select a valid item before deleting.'
+      '\n⚠️  Invalid selection. Please select a valid item before deleting.'
     );
     return;
   }

@@ -4,6 +4,7 @@
     "title": "flat-hier_reqtext",
     "hier": 0,
     "outline": "0",
+    "status": "v0.1 in Development",
     "description": "PLACEHOLDER"
   },
   {
@@ -11,6 +12,7 @@
     "title": "RunTime - Node.js",
     "hier": 1,
     "outline": "0.1",
+    "status": "Passing",
     "description": "PLACEHOLDER"
   },
   {
@@ -18,6 +20,119 @@
     "title": "Flat JSON Source of Truth",
     "hier": 0,
     "outline": "1",
+    "status": "Passing",
     "description": "The source of truth for the architecture is a flat json file. The hierarchy is based on a level value, `hier`, which is a int to determine what level the node is in the hierarchy. The ordering is based on the position in the json. The outline numbering is calcuated base on the hier and the postion."
+  },
+  {
+    "unique_id": "2025-05-07T14:46:35.680Z-24633d65",
+    "title": "Core Logic",
+    "hier": 0,
+    "outline": "2",
+    "status": "In Dev",
+    "description": "Core logic used to manage the flat-hier json file. Used in the CLI, CLI editor and future GUI."
+  },
+  {
+    "unique_id": "2025-05-07T14:46:45.750Z-be2dc883",
+    "title": "Add Item",
+    "hier": 1,
+    "outline": "2.1",
+    "status": "Pass",
+    "description": "Add item under a outline number."
+  },
+  {
+    "unique_id": "2025-05-07T14:46:51.855Z-bccab009",
+    "title": "Delete Item",
+    "hier": 1,
+    "outline": "2.2",
+    "status": "Pass",
+    "description": "Delete Item by outline number."
+  },
+  {
+    "unique_id": "2025-05-07T14:48:38.028Z-75047e32",
+    "title": "BUG: Deleting Last Item",
+    "hier": 2,
+    "outline": "2.2.1",
+    "status": "Pass",
+    "description": "When deleting the last item in editor the selected index incremented past the end of the list. This caused an error when trying to add new item."
+  },
+  {
+    "unique_id": "2025-05-07T14:46:58.903Z-11f9bdee",
+    "title": "Demote/Promote Item and Children",
+    "hier": 1,
+    "outline": "2.3",
+    "status": "Pass",
+    "description": "Demote and Promote a item and it's children by outline number. This is used to move items up and down in the hierarchy."
+  },
+  {
+    "unique_id": "2025-05-07T14:49:49.359Z-85e57de9",
+    "title": "Move Item and Children Up/Down",
+    "hier": 1,
+    "outline": "2.4",
+    "status": "Pass",
+    "description": "This feature allows users to move items and their children up or down in the hierarchy."
+  },
+  {
+    "unique_id": "2025-05-07T15:04:19.429Z-4acade87",
+    "title": "CLI Editor",
+    "hier": 0,
+    "outline": "3",
+    "status": "PLACEHOLDER",
+    "description": "PLACEHOLDER"
+  },
+  {
+    "unique_id": "2025-05-07T15:14:15.153Z-6621e202",
+    "title": "Up/Down Arrows - Navigate Items",
+    "hier": 1,
+    "outline": "3.1",
+    "status": "PLACEHOLDER",
+    "description": "PLACEHOLDER"
+  },
+  {
+    "unique_id": "2025-05-07T15:14:37.322Z-39de1fb3",
+    "title": "BUG: Moving past children messes up selected index",
+    "hier": 2,
+    "outline": "3.1.1",
+    "status": "PLACEHOLDER",
+    "description": "PLACEHOLDER"
+  },
+  {
+    "unique_id": "2025-05-07T15:11:14.386Z-49451bab",
+    "title": "Ctrl+N Add Item",
+    "hier": 1,
+    "outline": "3.2",
+    "status": "PLACEHOLDER",
+    "description": "PLACEHOLDER"
+  },
+  {
+    "unique_id": "2025-05-07T15:11:57.514Z-ae8e2126",
+    "title": "BUG: Adding Item Enter Title Appears Above Index",
+    "hier": 2,
+    "outline": "3.2.1",
+    "status": "PLACEHOLDER",
+    "description": "PLACEHOLDER"
+  },
+  {
+    "unique_id": "2025-05-07T15:12:44.517Z-a02799ea",
+    "title": "Delete - Delete Selected Item",
+    "hier": 1,
+    "outline": "3.3",
+    "status": "PLACEHOLDER",
+    "description": "PLACEHOLDER"
+  },
+  {
+    "unique_id": "2025-05-07T15:13:56.552Z-65805aa4",
+    "title": "Right/Left Arrows - Demote/Promote",
+    "hier": 1,
+    "outline": "3.4",
+    "status": "PLACEHOLDER",
+    "description": "PLACEHOLDER"
+  },
+  {
+    "unique_id": "2025-05-07T15:15:17.700Z-cbffcc07",
+    "title": "Shift+Up/Down Arrows - Move Items",
+    "hier": 1,
+    "outline": "3.5",
+    "status": "PLACEHOLDER",
+    "description": "PLACEHOLDER"
   }
 ]
