@@ -133,8 +133,18 @@ function cancelEdit() {
 async function saveEdit() {
   const newTitle = state.editBuffer.trim();
   if (newTitle) {
-    state.data[state.selectedIndex].title = newTitle;
-    await persist(state.data);
+    // Reload the latest data from the file
+    await state.ds.loadData();
+    const latestData = state.ds.getData();
+
+    // Update the title in the latest data
+    latestData[state.selectedIndex].title = newTitle;
+
+    // Persist the updated data
+    await persist(latestData);
+
+    // Update in-memory state
+    state.data = latestData;
     render();
   } else {
     console.log('\nNo changes made.');

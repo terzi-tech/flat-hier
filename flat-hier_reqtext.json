@@ -1,0 +1,23 @@
+[
+  {
+    "unique_id": "2025-05-07T14:27:13.371Z-1e761da5",
+    "title": "flat-hier_reqtext",
+    "hier": 0,
+    "outline": "0",
+    "description": "PLACEHOLDER"
+  },
+  {
+    "unique_id": "2025-05-07T14:27:13.372Z-c45c2b04",
+    "title": "RunTime - Node.js",
+    "hier": 1,
+    "outline": "0.1",
+    "description": "PLACEHOLDER"
+  },
+  {
+    "unique_id": "2025-05-07T14:32:20.242Z-603a49d0",
+    "title": "Flat JSON Source of Truth",
+    "hier": 0,
+    "outline": "1",
+    "description": "The source of truth for the architecture is a flat json file. The hierarchy is based on a level value, `hier`, which is a int to determine what level the node is in the hierarchy. The ordering is based on the position in the json. The outline numbering is calcuated base on the hier and the postion."
+  }
+]
