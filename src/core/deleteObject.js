@@ -1,5 +1,5 @@
 // src/commands/deleteObject.js
-import { computeOutlines } from '../index.js';
+import { computeOutlines } from '../utils/computeOutlines.js';
 
 /**
  * Deletes the object at the given index, updates the selection,
@@ -9,42 +9,22 @@ import { computeOutlines } from '../index.js';
  * @param {number|null} selectedIndex - Index of the item to delete.
  * @returns {{ data: Array<Object>, selectedIndex: number|null } | void}
  */
-export async function deleteObject(data, selectedIndex) {
-  // ──────────────────────────────────────────────────────────
-  // 1. Validate selection
-  // ──────────────────────────────────────────────────────────
-  const isIndexInvalid =
-    selectedIndex == null ||
-    selectedIndex < 0 ||
-    selectedIndex >= data.length;
-
-  if (isIndexInvalid) {
+export function deleteObject(data, selectedIndex) {
+  if (selectedIndex < 0 || selectedIndex >= data.length) {
     console.error(
-      '\n⚠️  Invalid selection. Please select a valid item before deleting.'
+      `⚠️  Invalid selection. Please select a valid item before deleting.`
     );
     return;
   }
 
-  // ──────────────────────────────────────────────────────────
-  // 2. Remove the selected item
-  // ──────────────────────────────────────────────────────────
+  // Remove the selected item
   data.splice(selectedIndex, 1);
 
-  // ──────────────────────────────────────────────────────────
-  // 3. Compute the new selectedIndex
-  // ──────────────────────────────────────────────────────────
-  const hasItemsRemaining = data.length > 0;
-  const newSelectedIndex = hasItemsRemaining
-    ? Math.max(0, selectedIndex)
-    : null;
+  // Update the selected index
+  const newSelectedIndex = data.length > 0 ? Math.max(0, selectedIndex) : null;
 
-  // ──────────────────────────────────────────────────────────
-  // 4. Recompute outlines
-  // ──────────────────────────────────────────────────────────
+  // Recompute outlines for the entire data array
   computeOutlines(data);
 
-  // ──────────────────────────────────────────────────────────
-  // 5. Return updated state
-  // ──────────────────────────────────────────────────────────
   return { data, selectedIndex: newSelectedIndex };
 }

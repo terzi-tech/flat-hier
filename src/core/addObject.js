@@ -2,7 +2,7 @@
 import crypto from 'crypto';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
-import { dirname, join } from 'path';
+import { dirname, resolve } from 'path';
 import { generateUniqueId } from '../utils/generateUniqueId.js';
 import { computeOutlines } from '../utils/computeOutlines.js';
 
@@ -11,15 +11,14 @@ import { computeOutlines } from '../utils/computeOutlines.js';
 // ──────────────────────────────────────────────────────────
 const __filename   = fileURLToPath(import.meta.url);
 const __dirname    = dirname(__filename);
-const templatePath = join(__dirname, '../../templates/newObjectTemplate.json');
+const templatePath = resolve(__dirname, '../../templates/newObjectTemplate.json');
 
 let template;
 try {
   const raw = fs.readFileSync(templatePath, 'utf8');
   template  = JSON.parse(raw);
 } catch (err) {
-  console.error(`Failed to load template at ${templatePath}:`, err);
-  process.exit(1);
+  throw new Error(`Failed to load template at ${templatePath}: ${err.message}`);
 }
 
 /**
