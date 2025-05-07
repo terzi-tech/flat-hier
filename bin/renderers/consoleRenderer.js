@@ -1,5 +1,7 @@
 import { createAsciiTree } from '../../src/index.js';
 
+let previousState = [];
+
 export async function renderToConsole(data, selectedIndex) {
     const tree = await createAsciiTree(data);
 
@@ -13,9 +15,21 @@ export async function renderToConsole(data, selectedIndex) {
     // Get the terminal size and calculate visible range
     const visibleRange = calculateVisibleRange(tree, selectedIndex);
 
-    // Clear the console and render the visible tree
-    clearConsole();
-    renderTreeWithHighlight(tree, visibleRange, selectedIndex, rootNode);
+    // Generate the new state of the console
+    const newState = generateConsoleState(tree, visibleRange, selectedIndex, rootNode);
+
+    // Calculate the diff between the previous and new states
+    const diffIndices = calculateDiff(previousState, newState);
+
+    // Clear and rerender only the changed lines
+    diffIndices.forEach(index => {
+        process.stdout.write(`\x1b[${index + 1};1H`); // Move to the line
+        process.stdout.write(`\x1b[2K`);             // Clear the entire line
+        process.stdout.write(newState[index]);       // Write the updated line
+    });
+
+    // Update the previous state
+    previousState = newState;
 }
 
 // Helper: Calculate the visible range of the tree
@@ -31,37 +45,49 @@ function clearConsole() {
     process.stdout.write('\x1b[2J\x1b[H');
 }
 
-// Helper: Render the tree with the selected index highlighted and shortcuts
-function renderTreeWithHighlight(tree, visibleRange, selectedIndex, rootNode) {
+function generateConsoleState(tree, visibleRange, selectedIndex, rootNode) {
     const { startIndex, endIndex } = visibleRange;
     const visibleTree = tree.slice(startIndex, endIndex);
 
-    // Render the root node at the top
-    process.stdout.write(rootNode);
+    const state = [];
 
-    // Render the rest of the visible tree
+    // Add the root node to the state
+    state.push(rootNode);
+
+    // Add the visible tree lines to the state
     visibleTree.forEach((line, index) => {
         if (index === selectedIndex - startIndex) {
-            highlightLine(line); // Highlight the selected line
+            state.push(`\x1b[7m${line}\x1b[0m`); // Highlight the selected line
         } else {
-            process.stdout.write(line);
+            state.push(line);
         }
     });
 
-    // Render shortcuts at the bottom
-    renderShortcuts();
+    // Add the shortcuts to the state
+    const [, height] = process.stdout.getWindowSize();
+    while (state.length < height - 1) {
+        state.push(''); // Fill empty lines
+    }
+    state.push(renderShortcutsToString());
+
+    return state;
 }
 
-// Helper: Highlight a line
-function highlightLine(line) {
-    process.stdout.write(`\x1b[7m${line}\x1b[0m`); // Inverted colors
+function calculateDiff(prev, next) {
+    const diffIndices = [];
+    const maxLength = Math.max(prev.length, next.length);
+
+    for (let i = 0; i < maxLength; i++) {
+        if (prev[i] !== next[i]) {
+            diffIndices.push(i);
+        }
+    }
+
+    return diffIndices;
 }
 
-// Helper: Render shortcut descriptions at the bottom of the console
-function renderShortcuts() {
-    const shortcuts = "↑↓ Nav | ↵ Select | Esc Quit | → Demote | ← Promote | ⇧↓ Item Down | ⇧↑ Item Up";
-    const [, width] = process.stdout.getWindowSize();
-    const paddedShortcuts = shortcuts.padEnd(width, ' ');
-    process.stdout.write(`\n${paddedShortcuts}`);
+function renderShortcutsToString() {
+    const shortcuts = "\u2191\u2193 Nav | \u21b5 Edit Title | Esc Quit | \u2192 Demote | \u2190 Promote | \u21e7\u2193 Item Down | \u21e7\u2191 Item Up";
+    return `\x1b[7m${shortcuts}\x1b[0m`;
 }
 
