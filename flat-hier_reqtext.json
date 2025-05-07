@@ -20,7 +20,8 @@
     "title": "Core Logic needs to all be from outlines and unique ids",
     "hier": 1,
     "outline": "0.2",
-    "status": "Triaged",
+    "type": "Refactor",
+    "status": "In Dev",
     "description": "Refactor needed so that the core functions are not part of the selected index which drives the CLI. They need to only be given the data and the outline number, and return the new data.\n\nThe unique ids should always be tracked in and out of each function."
   },
   {
