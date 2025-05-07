@@ -67,6 +67,11 @@ const initCommand = () => {
             item.unique_id = generateUniqueId();
         });
 
+        // Rename the title of the first item to the file name
+        if (parsedTemplate.length > 0) {
+            parsedTemplate[0].title = fileName;
+        }
+
         fs.writeFileSync(outputPath, JSON.stringify(parsedTemplate, null, 4), 'utf-8');
         console.log(`${finalFileName} has been initialized with updated unique IDs.`);
 
