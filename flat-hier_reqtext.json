@@ -16,6 +16,22 @@
     "description": "PLACEHOLDER"
   },
   {
+    "unique_id": "2025-05-07T16:00:26.775Z-0f701c77",
+    "title": "Core Logic needs to all be from outlines and unique ids",
+    "hier": 1,
+    "outline": "0.2",
+    "status": "Triaged",
+    "description": "Refactor needed so that the core functions are not part of the selected index which drives the CLI. They need to only be given the data and the outline number, and return the new data.\n\nThe unique ids should always be tracked in and out of each function."
+  },
+  {
+    "unique_id": "2025-05-07T16:06:22.549Z-b354e2c0",
+    "title": "Improve: Allow for more demote layers",
+    "hier": 1,
+    "outline": "0.3",
+    "status": "PLACEHOLDER",
+    "description": "PLACEHOLDER"
+  },
+  {
     "unique_id": "2025-05-07T14:32:20.242Z-603a49d0",
     "title": "Flat JSON Source of Truth",
     "hier": 0,
@@ -80,34 +96,34 @@
     "description": "CLI Tree view editor."
   },
   {
-    "unique_id": "2025-05-07T15:14:15.153Z-6621e202",
-    "title": "Up/Down Arrows - Navigate Items",
+    "unique_id": "2025-05-07T16:05:23.915Z-ee8f33ad",
+    "title": "Improve: Menu Bar at Bottom",
     "hier": 1,
     "outline": "3.1",
-    "status": "Pass",
-    "description": "Allows users to navigate through items in the hierarchy using the up and down arrow keys."
+    "status": "PLACEHOLDER",
+    "description": "PLACEHOLDER"
   },
   {
-    "unique_id": "2025-05-07T15:11:14.386Z-49451bab",
-    "title": "Ctrl+N Add Item",
+    "unique_id": "2025-05-07T15:13:56.552Z-65805aa4",
+    "title": "Right/Left Arrows - Demote/Promote",
     "hier": 1,
     "outline": "3.2",
     "status": "Pass",
-    "description": "Enables users to add a new item to the hierarchy by pressing Ctrl+N."
+    "description": "Enables users to demote or promote items in the hierarchy using the right or left arrow keys."
   },
   {
-    "unique_id": "2025-05-07T15:11:57.514Z-ae8e2126",
-    "title": "BUG: Adding Item Enter Title Appears Above Index",
-    "hier": 2,
-    "outline": "3.2.1",
-    "status": "Triaged",
-    "description": "Fixes an issue where the 'Enter Title' prompt appears above the selected index when adding a new item."
+    "unique_id": "2025-05-07T15:12:44.517Z-a02799ea",
+    "title": "Delete - Delete Selected Item",
+    "hier": 1,
+    "outline": "3.3",
+    "status": "Pass",
+    "description": "Allows users to delete the currently selected item from the hierarchy."
   },
   {
     "unique_id": "2025-05-07T15:15:17.700Z-cbffcc07",
     "title": "Shift+Up/Down Arrows - Move Items",
     "hier": 1,
-    "outline": "3.3",
+    "outline": "3.4",
     "status": "Pass",
     "description": "Allows users to move items up or down in the hierarchy using Shift combined with the up or down arrow keys."
   },
@@ -115,24 +131,32 @@
     "unique_id": "2025-05-07T15:14:37.322Z-39de1fb3",
     "title": "BUG: Moving past children messes up selected index",
     "hier": 2,
-    "outline": "3.3.1",
+    "outline": "3.4.1",
     "status": "Pass",
     "description": "Fixes an issue where moving an item past its children causes the selected index to become inconsistent."
   },
   {
-    "unique_id": "2025-05-07T15:12:44.517Z-a02799ea",
-    "title": "Delete - Delete Selected Item",
-    "hier": 1,
-    "outline": "3.4",
-    "status": "Pass",
-    "description": "Allows users to delete the currently selected item from the hierarchy."
-  },
-  {
-    "unique_id": "2025-05-07T15:13:56.552Z-65805aa4",
-    "title": "Right/Left Arrows - Demote/Promote",
+    "unique_id": "2025-05-07T15:11:14.386Z-49451bab",
+    "title": "Ctrl+N Add Item",
     "hier": 1,
     "outline": "3.5",
     "status": "Pass",
-    "description": "Enables users to demote or promote items in the hierarchy using the right or left arrow keys."
+    "description": "Enables users to add a new item to the hierarchy by pressing Ctrl+N."
+  },
+  {
+    "unique_id": "2025-05-07T15:11:57.514Z-ae8e2126",
+    "title": "BUG: Adding Item Enter Title Appears Above Index",
+    "hier": 2,
+    "outline": "3.5.1",
+    "status": "Triaged",
+    "description": "Fixes an issue where the 'Enter Title' prompt appears above the selected index when adding a new item."
+  },
+  {
+    "unique_id": "2025-05-07T15:14:15.153Z-6621e202",
+    "title": "Up/Down Arrows - Navigate Items",
+    "hier": 1,
+    "outline": "3.6",
+    "status": "Pass",
+    "description": "Allows users to navigate through items in the hierarchy using the up and down arrow keys."
   }
 ]
