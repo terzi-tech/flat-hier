@@ -234,7 +234,16 @@ async function deleteObjectHandler() {
 }
 
 async function demoteHandler() {
-  const updated = demote(state.data, state.selectedIndex);
+  // Get unique id from the selected item
+  const selectedItem = state.data[state.selectedIndex];
+  if (!selectedItem) {
+    console.error('No valid item selected.');
+    return;
+  }
+  // Get the outline number of the selected item
+  const outlineNumber = state.data[state.selectedIndex]?.outline;
+
+  const updated = demote(state.data, outlineNumber);
   if (updated) {
     await persist(updated);
     render();
