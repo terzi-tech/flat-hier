@@ -192,11 +192,12 @@ async function persist(updatedData) {
 ────────────────────────────────────────────────────────── */
 async function addObjectHandler() {
   // Get unique id from the selected item
-  if (!state.data.length) return console.log('No items to add to.');
-  if (state.selectedIndex < 0 || state.selectedIndex >= state.data.length) {
-    console.error('Selected index is out of bounds.');
+  const selectedItem = state.data[state.selectedIndex];
+  if (!selectedItem) {
+    console.error('No valid item selected.');
     return;
   }
+  const uniqueId = selectedItem.unique_id;
   // Get the outline number of the selected item
   const outlineNumber = state.data[state.selectedIndex]?.outline;
   if (!outlineNumber) {
@@ -218,7 +219,13 @@ async function deleteObjectHandler() {
   const res = await deleteObject(state.data, state.selectedIndex);
   if (res) {
     state.data = res.data;
-    state.selectedIndex = res.selectedIndex;
+    // Find Index with the unique id
+    const uniqueId = state.data[state.selectedIndex]?.unique_id;
+    if (!uniqueId) {
+      console.error('No valid unique ID found for the selected index.');
+      return;
+    }
+    state.selectedIndex = uniqueId;
     await persist(state.data);
     render();
     console.log('Item deleted.');
