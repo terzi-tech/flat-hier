@@ -7,6 +7,8 @@
  * @returns {Array<Object>} The updated array with the moved item.
  */
 export function moveDown(items, outlineToMove) {
+    // Get the unique_id of the item to move
+    const itemToMove = items.find(i => i.outline === outlineToMove);
     // Build node objects with children
     const nodeMap = {};
     const nodes = items.map(i => ({ ...i, children: [] }));
@@ -49,6 +51,6 @@ export function moveDown(items, outlineToMove) {
     newItems.forEach(item => {
       delete item.children;
     });
-    return  newItems; // Return an object with the updated items and selectedIndex
+    return  { newItems, itemToMove }; // Return an object with the updated items and selectedIndex
 }
 

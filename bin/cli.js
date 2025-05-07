@@ -220,22 +220,22 @@ async function promoteHandler() {
 
 async function moveDownHandler() {
   const outline = state.data[state.selectedIndex].outline;
-  let updated   = moveDown(state.data, outline);
+  let { newItems: updated, itemToMove } = moveDown(state.data, outline);
   if (updated) {
     updated = computeOutlines(updated);
     await persist(updated);
-    state.selectedIndex = Math.min(state.selectedIndex + 1, state.data.length - 1);
+    state.selectedIndex = updated.findIndex(i => i.unique_id === itemToMove.unique_id);
     render();
   }
 }
 
 async function moveUpHandler() {
   const outline = state.data[state.selectedIndex].outline;
-  let updated   = moveUp(state.data, outline);
+  let { newItems: updated, itemToMove } = moveUp(state.data, outline);
   if (updated) {
     updated = computeOutlines(updated);
     await persist(updated);
-    state.selectedIndex = Math.max(state.selectedIndex - 1, 0);
+    state.selectedIndex = updated.findIndex(i => i.unique_id === itemToMove.unique_id);
     render();
   }
 }

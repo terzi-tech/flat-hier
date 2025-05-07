@@ -6,6 +6,8 @@
  * @returns {Array} A new array with updated hier and outline fields.
  */
 export function moveUp(items, outlineToMove) {
+    // Get the unique_id of the item to move
+    const itemToMove = items.find(i => i.outline === outlineToMove);
     // Build node objects with children
     const nodeMap = {};
     const nodes = items.map(i => ({ ...i, children: [] }));
@@ -50,5 +52,5 @@ export function moveUp(items, outlineToMove) {
     newItems.forEach(item => {
       delete item.children;
     });
-    return newItems;
+    return { newItems, itemToMove };
   }
