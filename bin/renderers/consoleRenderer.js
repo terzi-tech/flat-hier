@@ -60,7 +60,8 @@ function calculateVisibleRange(tree, selectedIndex) {
 }
 
 function moveCursor(row, col = 1) {
-  process.stdout.write(`\x1b[${row};${col}H`);
+  process.stdout.write(`\x1b[${row};${col}H`); // Move cursor
+  process.stdout.write(`\x1b[2K`); // Clear the line
 }
 
 function invertWrite(line) {
@@ -68,7 +69,7 @@ function invertWrite(line) {
 }
 
 function renderShortcuts() {
-  const shortcuts = "↑↓ Nav | ↵ Edit Title | Esc Quit | …";
+  const shortcuts = "↑↓ Nav | ↵ Edit Title | Esc Quit | ← → Promote/Demote | Shift + ↑↓ Move Item "
   const [width, height] = process.stdout.getWindowSize();
   moveCursor(height, 1);
   const bar = shortcuts.padEnd(width, ' ');
