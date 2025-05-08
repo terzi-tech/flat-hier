@@ -236,6 +236,7 @@ async function deleteObjectHandler() {
 async function demoteHandler() {
   // Get unique id from the selected item
   const selectedItem = state.data[state.selectedIndex];
+  const uniqueId = selectedItem?.unique_id;
   if (!selectedItem) {
     console.error('No valid item selected.');
     return;
@@ -246,14 +247,31 @@ async function demoteHandler() {
   const updated = demote(state.data, outlineNumber);
   if (updated) {
     await persist(updated);
+    // Set the selected index to item with the same unique id
+    const newIndex = updated.findIndex(item => item.unique_id === uniqueId);
+    state.selectedIndex = newIndex !== -1 ? newIndex : state.selectedIndex;
     render();
   }
 }
 
 async function promoteHandler() {
-  const updated = promote(state.data, state.selectedIndex);
+  const outline = state.data[state.selectedIndex]?.outline;
+  if (!outline) {
+    console.error('No valid outline found for the selected index.');
+    return;
+  }
+  const selectedItem = state.data[state.selectedIndex];
+  const uniqueId = selectedItem?.unique_id;
+  if (!selectedItem) {
+    console.error('No valid item selected.');
+    return;
+  }
+  const updated = promote(state.data, outline);
   if (updated) {
     await persist(updated);
+      // Set the selected index to item with the same unique id
+      const newIndex = updated.findIndex(item => item.unique_id === uniqueId);
+      state.selectedIndex = newIndex !== -1 ? newIndex : state.selectedIndex;
     render();
   }
 }
