@@ -1,12 +1,35 @@
 import { createAsciiTree } from '../../src/index.js';
+import DataService from '../../src/services/DataService.js';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname  = path.dirname(__filename);
+
+// Update the configPath to point to the configuration file in the package directory
+const configPath = path.resolve(__dirname, '../../flat-hier.config.json');
+const config = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
+
+const templateFilePath = path.resolve(process.cwd(), config.templateFileName);
+const treeDataFilePath = path.resolve(process.cwd(), config.filepath);
+
+
+const dataService = new DataService(treeDataFilePath);
+
 
 let _lastRendered = {
   lines: [],         // array of strings (with trailing “\n”)
   highlighted: null, // which index was inverted last time
-  root: ''           // the rootNode line
+  root: '',          // the rootNode line
+  data: null,        // the current data
+  selectedIndex: 0   // the current selected index
 };
 
 export async function renderToConsole(data, selectedIndex) {
+  _lastRendered.data = data;
+  _lastRendered.selectedIndex = selectedIndex;
+
   const tree       = await createAsciiTree(data);
   const rootNode   = tree[0];
   const bodyLines  = tree.slice(1);
@@ -75,3 +98,30 @@ function renderShortcuts() {
   const bar = shortcuts.padEnd(width, ' ');
   process.stdout.write(`\x1b[7m${bar}\x1b[0m`);
 }
+
+// Update the SIGWINCH listener to reload data if necessary
+process.on('SIGWINCH', async () => {
+  console.clear();
+  _lastRendered = {
+    lines: [],
+    highlighted: null,
+    root: '',
+    data: null,
+    selectedIndex: 0
+  };
+  console.log('Resize detected. Resetting rendering state.');
+
+  try {
+    // Reload data from DataService
+    await dataService.loadData();
+    const data = dataService.getData();
+
+    if (data) {
+      renderToConsole(data, 0); // Render with the reloaded data
+    } else {
+      console.error('No data available to render.');
+    }
+  } catch (error) {
+    console.error('Failed to reload data after resize:', error.message);
+  }
+});
