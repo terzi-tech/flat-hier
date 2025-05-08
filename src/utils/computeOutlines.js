@@ -10,6 +10,26 @@ export function computeOutlines(items) {
     let prevLevel = 0;
   
     for (const item of items) {
+      if (item.outline === 'pending') {
+        // Update the outline for items marked as 'pending'
+        const level = item.hier;
+
+        if (level > prevLevel) {
+          for (let lvl = prevLevel + 1; lvl <= level; lvl++) {
+            counters[lvl] = 1;
+          }
+        } else if (level < prevLevel) {
+          counters.splice(level + 1);
+          counters[level]++;
+        } else {
+          counters[level]++;
+        }
+
+        prevLevel = level;
+        item.outline = counters.join('.');
+        continue;
+      }
+      
       const level = item.hier;
   
       if (level > prevLevel) {
@@ -32,4 +52,3 @@ export function computeOutlines(items) {
   
     return items;
   }
-  

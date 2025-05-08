@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "node bin/cli.js",
-    "test": "vitest"
+    "test": "vitest run test"
   },
   "bin": {
     "fjt": "./bin/cli.js"

@@ -133,8 +133,18 @@ function cancelEdit() {
 async function saveEdit() {
   const newTitle = state.editBuffer.trim();
   if (newTitle) {
-    state.data[state.selectedIndex].title = newTitle;
-    await persist(state.data);
+    // Reload the latest data from the file
+    await state.ds.loadData();
+    const latestData = state.ds.getData();
+
+    // Update the title in the latest data
+    latestData[state.selectedIndex].title = newTitle;
+
+    // Persist the updated data
+    await persist(latestData);
+
+    // Update in-memory state
+    state.data = latestData;
     render();
   } else {
     console.log('\nNo changes made.');
@@ -181,7 +191,21 @@ async function persist(updatedData) {
    OBJECT OPERATIONS
 ────────────────────────────────────────────────────────── */
 async function addObjectHandler() {
-  const res = await addObject(state.data, state.selectedIndex, templateFilePath);
+  // Get unique id from the selected item
+  const selectedItem = state.data[state.selectedIndex];
+  if (!selectedItem) {
+    console.error('No valid item selected.');
+    return;
+  }
+  const uniqueId = selectedItem.unique_id;
+  // Get the outline number of the selected item
+  const outlineNumber = state.data[state.selectedIndex]?.outline;
+  if (!outlineNumber) {
+    console.error('No valid outline number found for the selected index.');
+    return;
+  }
+
+  const res = await addObject(state.data, outlineNumber);
   if (res) {
     state.data = res.data;
     state.selectedIndex = res.selectedIndex;
@@ -191,11 +215,18 @@ async function addObjectHandler() {
 }
 
 async function deleteObjectHandler() {
-  if (!state.data.length) return console.log('No items to delete.');
-  const res = await deleteObject(state.data, state.selectedIndex);
+    // Get unique id from the selected item
+    const selectedItem = state.data[state.selectedIndex];
+    if (!selectedItem) {
+      console.error('No valid item selected.');
+      return;
+    }
+    // Get the outline number of the selected item
+    const outlineNumber = state.data[state.selectedIndex]?.outline;
+  const res = await deleteObject(state.data, outlineNumber);
   if (res) {
     state.data = res.data;
-    state.selectedIndex = res.selectedIndex;
+
     await persist(state.data);
     render();
     console.log('Item deleted.');
@@ -203,17 +234,44 @@ async function deleteObjectHandler() {
 }
 
 async function demoteHandler() {
-  const updated = demote(state.data, state.selectedIndex);
+  // Get unique id from the selected item
+  const selectedItem = state.data[state.selectedIndex];
+  const uniqueId = selectedItem?.unique_id;
+  if (!selectedItem) {
+    console.error('No valid item selected.');
+    return;
+  }
+  // Get the outline number of the selected item
+  const outlineNumber = state.data[state.selectedIndex]?.outline;
+
+  const updated = demote(state.data, outlineNumber);
   if (updated) {
     await persist(updated);
+    // Set the selected index to item with the same unique id
+    const newIndex = updated.findIndex(item => item.unique_id === uniqueId);
+    state.selectedIndex = newIndex !== -1 ? newIndex : state.selectedIndex;
     render();
   }
 }
 
 async function promoteHandler() {
-  const updated = promote(state.data, state.selectedIndex);
+  const outline = state.data[state.selectedIndex]?.outline;
+  if (!outline) {
+    console.error('No valid outline found for the selected index.');
+    return;
+  }
+  const selectedItem = state.data[state.selectedIndex];
+  const uniqueId = selectedItem?.unique_id;
+  if (!selectedItem) {
+    console.error('No valid item selected.');
+    return;
+  }
+  const updated = promote(state.data, outline);
   if (updated) {
     await persist(updated);
+      // Set the selected index to item with the same unique id
+      const newIndex = updated.findIndex(item => item.unique_id === uniqueId);
+      state.selectedIndex = newIndex !== -1 ? newIndex : state.selectedIndex;
     render();
   }
 }
