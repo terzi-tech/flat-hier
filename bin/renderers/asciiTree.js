@@ -54,7 +54,7 @@ export async function createAsciiTree(items) {
 
       // Ensure no leading spaces before the prefix art
       const formattedOutline = outline;
-      treeArray.push(`${prefix}${branchSymbol}${formattedOutline} - ${node.title}\n`);
+      treeArray.push(`${prefix}${branchSymbol}${formattedOutline}: ${node.title}\n`);
 
       const kids = children[outline] || [];
       kids.forEach((child, idx) => {
