@@ -92,9 +92,14 @@ function invertWrite(line) {
 }
 
 function renderShortcuts() {
-  const shortcuts = "↑↓ Nav | ↵ Edit Title | Esc Quit | ← → Promote/Demote | Shift + ↑↓ Move Item "
+  const shortcuts = "↑↓ Nav | ↵ Edit Title | Esc Quit | ← → Promote/Demote | Shift + ↑↓ Move Item ";
   const [width, height] = process.stdout.getWindowSize();
-  moveCursor(height, 1);
+
+  // Clear the last line before rendering the shortcuts bar
+  moveCursor(height - 1, 1);
+  process.stdout.write('\x1b[2K'); // Clear the line
+
+  // Render the shortcuts bar
   const bar = shortcuts.padEnd(width, ' ');
   process.stdout.write(`\x1b[7m${bar}\x1b[0m`);
 }

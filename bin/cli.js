@@ -117,16 +117,16 @@ function moveSelection(delta) {
 function startEdit() {
   state.mode = 'edit';
   state.editBuffer = '';
-  // Move cursor to line and clear it
+  // Move cursor to the second-to-last line and clear it
   const [, h] = process.stdout.getWindowSize();
-  const offset = Math.max(0, state.selectedIndex - Math.floor(h / 2));
-  const row    = state.selectedIndex - offset + 1;
-  process.stdout.write(`\x1b[${row};1H\x1b[2KEnter Title: `);
+  const row = h - 1; // Second-to-last line
+  process.stdout.write(`\x1b[${row};1H\x1b[2K\x1b[34mEnter Title:\x1b[0m `);
   process.stdout.write('\x1B[?25h'); // show cursor
 }
 
 function cancelEdit() {
-  console.log('\nEdit cancelled.');
+  // Clear the current line
+  process.stdout.write('\x1b[2K\x1b[1G'); // Clear line and move cursor to the beginning
   exitEdit();
 }
 
