@@ -384,18 +384,18 @@ if (!keypressActive) {
 /* ──────────────────────────────────────────────────────────
    START
 ────────────────────────────────────────────────────────── */
-const [,, command, ...args] = process.argv;
+// const [,, command, ...args] = process.argv;
 
-if (!command) {
-    // If no command is provided, run the helpCommand
-    commandRegistry.help();
-} else if (commandRegistry[command]) {
-    commandRegistry[command](...args);
-} else {
-    console.error(`Unknown command: ${command}`);
-    console.log('run fhr --help for help');
-    cleanUp(state);
-}
+// if (!command) {
+//     console.log("No command provided. Use 'fhr-editor --help' for usage information.");
+//     process.exit(0);
+// } else if (commandRegistry[command]) {
+//     commandRegistry[command](...args);
+// } else {
+//     console.error(`Unknown command: ${command}`);
+//     console.log("Run 'fhr-editor --help' for usage information.");
+//     process.exit(1);
+// }
 
-
+boot();
 

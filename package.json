@@ -8,7 +8,8 @@
     "test": "vitest run test"
   },
   "bin": {
-    "fhr": "./bin/editor.js"
+    "fhr-editor": "./bin/editor.js",
+    "fhr": "./bin/cli.js"
   },
   "keywords": [],
   "author": "Joseph Terzi",
