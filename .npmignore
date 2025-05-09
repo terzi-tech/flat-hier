@@ -4,3 +4,7 @@ node_modules
 *.log
 # Git ignore files
 *.gitignores
+# Exclude the .vscode folder
+.vscode
+# Exclude the test folder
+test
