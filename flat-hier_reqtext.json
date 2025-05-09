@@ -37,7 +37,7 @@
     "title": "unique id",
     "hier": 1,
     "outline": "1.1",
-    "status": "Pass",
+    "status": "Passed",
     "description": "All items have a generated unique id based on the current date time and a UUID."
   },
   {
@@ -45,7 +45,7 @@
     "title": "outline field",
     "hier": 1,
     "outline": "1.2",
-    "status": "Pass",
+    "status": "Passed",
     "description": "hierarchical "
   },
   {
@@ -53,7 +53,7 @@
     "title": "hier field",
     "hier": 1,
     "outline": "1.3",
-    "status": "Pass",
+    "status": "Passed",
     "description": "PLACEHOLDER"
   },
   {
@@ -69,7 +69,7 @@
     "title": "Add Item",
     "hier": 1,
     "outline": "2.1",
-    "status": "Pass",
+    "status": "Passed",
     "description": "Add item under a outline number."
   },
   {
@@ -77,7 +77,7 @@
     "title": "Delete Item",
     "hier": 1,
     "outline": "2.2",
-    "status": "Pass",
+    "status": "Passed",
     "description": "Delete Item by outline number."
   },
   {
@@ -85,7 +85,7 @@
     "title": "BUG: Deleting Last Item",
     "hier": 2,
     "outline": "2.2.1",
-    "status": "Pass",
+    "status": "Passed",
     "description": "When deleting the last item in editor the selected index incremented past the end of the list. This caused an error when trying to add new item."
   },
   {
@@ -93,7 +93,7 @@
     "title": "Demote/Promote Item and Children",
     "hier": 1,
     "outline": "2.3",
-    "status": "Pass",
+    "status": "Passed",
     "description": "Demote and Promote a item and it's children by outline number. This is used to move items up and down in the hierarchy."
   },
   {
@@ -109,7 +109,7 @@
     "title": "Move Item and Children Up/Down",
     "hier": 1,
     "outline": "2.4",
-    "status": "Pass",
+    "status": "Passed",
     "description": "This feature allows users to move items and their children up or down in the hierarchy."
   },
   {
@@ -125,7 +125,7 @@
     "title": "Bug: promote appears above menu",
     "hier": 1,
     "outline": "3.1",
-    "status": "Pass",
+    "status": "Passed",
     "description": "PLACEHOLDER"
   },
   {
@@ -133,7 +133,7 @@
     "title": "Edit Title",
     "hier": 1,
     "outline": "3.2",
-    "status": "Pass",
+    "status": "Passed",
     "description": "PLACEHOLDER"
   },
   {
@@ -141,7 +141,7 @@
     "title": "Delete - Delete Selected Item",
     "hier": 1,
     "outline": "3.3",
-    "status": "Pass",
+    "status": "Passed",
     "description": "Allows users to delete the currently selected item from the hierarchy."
   },
   {
@@ -149,7 +149,7 @@
     "title": "Shift+Up/Down Arrows - Move Items",
     "hier": 1,
     "outline": "3.4",
-    "status": "Pass",
+    "status": "Passed",
     "description": "Allows users to move items up or down in the hierarchy using Shift combined with the up or down arrow keys."
   },
   {
@@ -157,7 +157,7 @@
     "title": "BUG: Moving past children messes up selected index",
     "hier": 2,
     "outline": "3.4.1",
-    "status": "Pass",
+    "status": "Passed",
     "description": "Fixes an issue where moving an item past its children causes the selected index to become inconsistent."
   },
   {
@@ -165,7 +165,7 @@
     "title": "Ctrl+N Add Item",
     "hier": 1,
     "outline": "3.5",
-    "status": "Pass",
+    "status": "Passed",
     "description": "Enables users to add a new item to the hierarchy by pressing Ctrl+N."
   },
   {
@@ -173,7 +173,7 @@
     "title": "BUG: Adding Item Enter Title Appears Above Index",
     "hier": 2,
     "outline": "3.5.1",
-    "status": "Pass",
+    "status": "Passed",
     "description": "Fixes an issue where the 'Enter Title' prompt appears above the selected index when adding a new item."
   },
   {
@@ -181,7 +181,7 @@
     "title": "Up/Down Arrows - Navigate Items",
     "hier": 1,
     "outline": "3.6",
-    "status": "Pass",
+    "status": "Passed",
     "description": "Allows users to navigate through items in the hierarchy using the up and down arrow keys."
   },
   {
@@ -189,7 +189,7 @@
     "title": "Right/Left Arrows - Demote/Promote",
     "hier": 1,
     "outline": "3.7",
-    "status": "Pass",
+    "status": "Passed",
     "description": "Enables users to demote or promote items in the hierarchy using the right or left arrow keys."
   },
   {
@@ -221,7 +221,7 @@
     "title": "--help, -h",
     "hier": 1,
     "outline": "4.2",
-    "status": "In Dev",
+    "status": "Passed",
     "description": "Displays help information."
   },
   {
@@ -229,7 +229,7 @@
     "title": "--add-after, -aa",
     "hier": 1,
     "outline": "4.3",
-    "status": "Accepted",
+    "status": "In Dev",
     "description": "Call add item after the entered outline number. This will add the item after the selected item."
   }
 ]
