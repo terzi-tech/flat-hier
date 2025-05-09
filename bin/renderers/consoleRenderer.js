@@ -14,7 +14,7 @@ const config = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
 const templateFilePath = path.resolve(process.cwd(), config.templateFileName);
 const treeDataFilePath = path.resolve(process.cwd(), config.filepath);
 
-const dataService = new DataService(treeDataFilePath);
+const dataService = new DataService();
 
 let _lastRendered = {
   lines: [],         // array of strings (with trailing "\n")

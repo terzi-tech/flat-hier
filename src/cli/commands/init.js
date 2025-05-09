@@ -8,7 +8,7 @@ const initCommand = () => {
     const __filename = fileURLToPath(import.meta.url);
     const __dirname = path.dirname(__filename);
     const templatePath = path.resolve(__dirname, '../../../templates/initTemplate.json');
-    const configPath = path.resolve(__dirname, '../../../flat-hier.config.json'); // Updated to dynamically resolve the config file path
+
 
     // Parse command-line arguments
     const args = process.argv.slice(2).map(arg => (arg === '-n' ? '--name' : arg)); // Normalize -n to --name
@@ -34,18 +34,23 @@ const initCommand = () => {
         });
     };
 
-    // Fix the `updateConfigFile` function to ensure it writes relative paths correctly
-    const updateConfigFile = (fileName) => {
-        const relativeFilePath = path.relative(process.cwd(), path.resolve(process.cwd(), fileName)); // Calculate relative path
+    const createConfigFile = (fileName) => {
+        const baseName = path.basename(fileName, path.extname(fileName)); // Extract base name without extension
+        const configFileName = `${baseName}.fhr.config.json`;
+        const configFilePath = path.join(process.cwd(), configFileName);
 
-        if (fs.existsSync(configPath)) {
-            const config = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
-            config.filepath = `./${relativeFilePath}`; // Save as relative path
-            fs.writeFileSync(configPath, JSON.stringify(config, null, 4), 'utf-8');
-            console.log(`Updated config file with relative path: ./${relativeFilePath}`);
-        } else {
-            console.warn('Warning: Config file not found. Skipping config update.');
+        if (fs.existsSync(configFilePath)) {
+            console.warn(`Warning: ${configFileName} already exists. Skipping creation.`);
+            return;
         }
+
+        const defaultConfig = {
+            filepath: `./${fileName}`,
+            createdAt: new Date().toISOString(),
+        };
+
+        fs.writeFileSync(configFilePath, JSON.stringify(defaultConfig, null, 4), 'utf-8');
+        console.log(`${configFileName} has been created.`);
     };
 
     const proceedWithFileName = (fileName) => {
@@ -74,8 +79,8 @@ const initCommand = () => {
         fs.writeFileSync(outputPath, JSON.stringify(parsedTemplate, null, 4), 'utf-8');
         console.log(`${finalFileName} has been initialized with updated unique IDs.`);
 
-        // Update the config file with a relative path
-        updateConfigFile(finalFileName);
+        // Create a new <name>.config.json file
+        createConfigFile(finalFileName);
 
         process.exit(0);
     };
