@@ -219,7 +219,7 @@ async function deleteObjectHandler() {
     await persist(state.data);
     // Reset the last rendered state
     await resetLastRendered();
-
+    console.clear();
     render();
   }
 }

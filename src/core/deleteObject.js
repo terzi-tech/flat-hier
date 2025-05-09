@@ -1,6 +1,6 @@
 // src/commands/deleteObject.js
 import { computeOutlines } from '../utils/computeOutlines.js';
-
+import { exitWithoutClear } from '../utils/exitWithoutClear.js';
 /**
  * Deletes the object with the given outline number, updates the selection,
  * and recomputes outlines for the remaining items.
@@ -10,6 +10,12 @@ import { computeOutlines } from '../utils/computeOutlines.js';
  * @returns {{ data: Array<Object>, selectedIndex: number|null } | void}
  */
 export function deleteObject(data, outlineNumber) {
+  // Add a condition to prevent deletion if there are only two objects left
+  if (data.length <= 2) {
+    console.error('⚠️  Cannot delete items when only two objects remain in the data.');
+    exitWithoutClear();
+  }
+
   // Find the index of the object with the given outline number
   const selectedIndex = data.findIndex(item => item.outline === outlineNumber);
 
