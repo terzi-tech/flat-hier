@@ -205,19 +205,33 @@ async function addObjectHandler() {
 }
 
 async function deleteObjectHandler() {
-    // Get unique id from the selected item
-    const selectedItem = state.data[state.selectedIndex];
-    if (!selectedItem) {
-      console.error('No valid item selected.');
-      return;
-    }
-    // Get the outline number of the selected item
-    const outlineNumber = state.data[state.selectedIndex]?.outline;
+  // Get the selected item
+  const selectedItem = state.data[state.selectedIndex];
+  if (!selectedItem) {
+    console.error('No valid item selected.');
+    return;
+  }
+
+  // Get the outline number of the selected item
+  const outlineNumber = selectedItem.outline;
+  if (!outlineNumber) {
+    console.error('No valid outline number found for the selected index.');
+    return;
+  }
+
+  // Perform the delete operation
   const res = await deleteObject(state.data, outlineNumber);
   if (res) {
+    // Update the state with the new data
     state.data = res.data;
+
+    // Persist the updated data
     await persist(state.data);
-    // Reset the last rendered state
+    // Set the selected index to the last item if the deleted item was the last one
+    if (state.selectedIndex >= state.data.length) {
+      state.selectedIndex = state.data.length - 1;
+    }
+    // Reset the last rendered state and re-render
     await resetLastRendered();
     console.clear();
     render();
