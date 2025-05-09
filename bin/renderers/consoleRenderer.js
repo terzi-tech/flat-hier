@@ -85,7 +85,7 @@ export async function renderToConsole(data, selectedIndex) {
 function calculateVisibleRange(tree, selectedIndex) {
   const [, height] = process.stdout.getWindowSize();
   const startIndex = Math.max(0, selectedIndex - Math.floor(height / 2));
-  const endIndex   = Math.min(tree.length, startIndex + height - 4);
+  const endIndex   = Math.min(tree.length, startIndex + height - 3);
   return { startIndex, endIndex };
 }
 

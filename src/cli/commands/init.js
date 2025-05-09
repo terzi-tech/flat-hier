@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import readline from 'readline';
-import { state } from '../../../bin/cli.js';
+import { state } from '../../../bin/editor.js';
 import { generateUniqueId } from '../../index.js';
 import { cleanUp } from '../../utils/cleanUp.js'; // Import the cleanup function
 

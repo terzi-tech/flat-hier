@@ -4,11 +4,11 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node bin/cli.js",
+    "start": "node bin/editor.js",
     "test": "vitest run test"
   },
   "bin": {
-    "fhr": "./bin/cli.js"
+    "fhr": "./bin/editor.js"
   },
   "keywords": [],
   "author": "Joseph Terzi",

@@ -1,7 +1,7 @@
 import initCommand from './commands/init.js';
 import helpCommand from './commands/help.js';
-import { boot } from '../../bin/cli.js';
-import { state } from '../../bin/cli.js';
+import { boot } from '../../bin/editor.js';
+import { state } from '../../bin/editor.js';
 import { exitWithoutClear } from '../utils/exitWithoutClear.js';
 
 const commandRegistry = {

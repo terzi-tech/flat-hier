@@ -1,5 +1,5 @@
 import path from 'path';
-import { cleanupStaleTemps } from "../../bin/cli.js";
+import { cleanupStaleTemps } from "../../bin/editor.js";
 
 export function cleanUp(state) {
     // Call cleanupStaleTemps or any other cleanup logic here
