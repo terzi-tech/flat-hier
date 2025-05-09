@@ -1,9 +1,11 @@
 #!/usr/bin/env node
 
-console.log('This is a CLI tool for managing your tasks.');
+import helpCommand from '../src/cli/commands/help.js';
 
+const args = process.argv.slice(2);
 
-
-import initCommand from '../src/cli/commands/init.js';
-
-initCommand();
+if (args.length === 0 || args.includes('--help') || args.includes('-h')) {
+    helpCommand();
+} else {
+    console.log('Unknown command. Use --help or -h for usage information.');
+}
