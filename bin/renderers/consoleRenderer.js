@@ -92,7 +92,7 @@ function invertWrite(line) {
 }
 
 function renderShortcuts() {
-  const shortcuts = "↑↓ Nav | ↵ Edit Title | Esc Quit | ← → Promote/Demote | Shift + ↑↓ Move Item ";
+  const shortcuts = "↑↓ Nav | ↵ Edit Title | Esc: Quit | ← → Promote/Demote | Shift + ↑↓ Move Item | r: Refresh";
   const [width, height] = process.stdout.getWindowSize();
 
   // Clear the last line before rendering the shortcuts bar

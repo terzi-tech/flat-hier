@@ -312,8 +312,15 @@ const keyMap = {
     return: startEdit,
     '\u000e': addObjectHandler, // Ctrl+N
     delete: deleteObjectHandler,
-    right:  demoteHandler,      // Changed from tab to right arrow
-    left:   promoteHandler      // Changed from shiftTab to left arrow
+    right:  demoteHandler,
+    left:   promoteHandler,
+    // r to refresh
+    'r':    async () => {
+      await state.ds.loadData();
+      state.data = state.ds.getData();
+      resetLastRendered();
+      render();
+    }
   },
   edit: {
     escape: cancelEdit,

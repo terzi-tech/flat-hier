@@ -29,7 +29,7 @@
     "title": "Improve: Allow for more demote layers",
     "hier": 1,
     "outline": "0.3",
-    "status": "PLACEHOLDER",
+    "status": "Accepted",
     "description": "PLACEHOLDER"
   },
   {
@@ -141,7 +141,7 @@
     "title": "Edit Title",
     "hier": 1,
     "outline": "3.2",
-    "status": "PLACEHOLDER",
+    "status": "Pass",
     "description": "PLACEHOLDER"
   },
   {
@@ -181,7 +181,7 @@
     "title": "BUG: Adding Item Enter Title Appears Above Index",
     "hier": 2,
     "outline": "3.5.1",
-    "status": "Triaged",
+    "status": "Pass",
     "description": "Fixes an issue where the 'Enter Title' prompt appears above the selected index when adding a new item."
   },
   {
@@ -205,7 +205,7 @@
     "title": "Commands",
     "hier": 0,
     "outline": "4",
-    "status": "PLACEHOLDER",
+    "status": "In Dev",
     "description": "PLACEHOLDER"
   },
   {
@@ -221,7 +221,7 @@
     "title": "Init new templates in local folder",
     "hier": 2,
     "outline": "4.1.1",
-    "status": "PLACEHOLDER",
+    "status": "Accepted",
     "description": "PLACEHOLDER"
   },
   {
@@ -229,7 +229,7 @@
     "title": "--help, -h",
     "hier": 1,
     "outline": "4.2",
-    "status": "Pass",
+    "status": "In Dev",
     "description": "Displays help information."
   },
   {
