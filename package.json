@@ -14,5 +14,8 @@
   "keywords": [],
   "author": "Joseph Terzi",
   "license": "MIT",
-  "description": "Library for creating and manipulating hierarchical data structures while storing in a flat json. It includes a cli, TUX, and local api."
+  "description": "Library for creating and manipulating hierarchical data structures while storing in a flat json. It includes a cli, TUX, and local api.",
+  "dependencies": {
+    "vitest": "^3.1.3"
+  }
 }

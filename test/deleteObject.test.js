@@ -1,14 +1,19 @@
 import { describe, it, expect, vi, beforeAll } from 'vitest';
 import { deleteObject } from '../src/core/deleteObject.js';
 import * as compute from '../src/utils/computeOutlines.js';
+import * as utils from '../src/utils/exitWithoutClear.js';
 
 vi.mock('../src/utils/computeOutlines.js');
+vi.mock('../src/utils/exitWithoutClear.js', () => ({
+  exitWithoutClear: vi.fn(),
+}));
 
 beforeAll(() => {
   vi.spyOn(process, 'stdin', 'get').mockReturnValue({
     setRawMode: vi.fn(),
     resume: vi.fn(),
-    setEncoding: vi.fn()
+    setEncoding: vi.fn(),
+    pause: vi.fn(),
   });
 });
 
