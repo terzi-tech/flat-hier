@@ -386,12 +386,14 @@ if (!keypressActive) {
 ────────────────────────────────────────────────────────── */
 const [,, command, ...args] = process.argv;
 
-if (commandRegistry[command]) {
+if (!command) {
+    // If no command is provided, run the helpCommand
+    commandRegistry.help();
+} else if (commandRegistry[command]) {
     commandRegistry[command](...args);
 } else {
     console.error(`Unknown command: ${command}`);
-    console.log('Available commands: init, edit');
-    // Close the process if no command is found
+    console.log('run fhr --help for help');
     cleanUp(state);
 }
 
