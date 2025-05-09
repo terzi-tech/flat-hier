@@ -5,7 +5,7 @@ Usage:
 
 Commands:
   init      Initialize a new project with a default template.
-    init <name>  Initialize a new project with a specified name.
+    --name, -n "<name>"  Specify the name of the project.
 
 
   editor    Launch the interactive editor to manage your flat-hier data.
