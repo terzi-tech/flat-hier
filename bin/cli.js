@@ -15,6 +15,7 @@ import {
   deleteObject
 } from '../src/index.js';
 import commandRegistry from '../src/cli/commandRegistry.js';
+import {resetLastRendered} from './renderers/consoleRenderer.js';
 
 /* ──────────────────────────────────────────────────────────
    CONFIG & STATE
@@ -226,10 +227,11 @@ async function deleteObjectHandler() {
   const res = await deleteObject(state.data, outlineNumber);
   if (res) {
     state.data = res.data;
-
     await persist(state.data);
+    // Reset the last rendered state
+    await resetLastRendered();
+
     render();
-    console.log('Item deleted.');
   }
 }
 

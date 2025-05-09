@@ -78,7 +78,7 @@ export async function renderToConsole(data, selectedIndex) {
 function calculateVisibleRange(tree, selectedIndex) {
   const [, height] = process.stdout.getWindowSize();
   const startIndex = Math.max(0, selectedIndex - Math.floor(height / 2));
-  const endIndex   = Math.min(tree.length, startIndex + height - 3);
+  const endIndex   = Math.min(tree.length, startIndex + height - 4);
   return { startIndex, endIndex };
 }
 
@@ -96,12 +96,22 @@ function renderShortcuts() {
   const [width, height] = process.stdout.getWindowSize();
 
   // Clear the last line before rendering the shortcuts bar
-  moveCursor(height - 1, 1);
+  moveCursor(height, 1);
   process.stdout.write('\x1b[2K'); // Clear the line
 
   // Render the shortcuts bar
   const bar = shortcuts.padEnd(width, ' ');
   process.stdout.write(`\x1b[7m${bar}\x1b[0m`);
+}
+
+export async function resetLastRendered() {
+  _lastRendered = {
+    lines: [],         // array of strings (with trailing “\n”)
+    highlighted: null, // which index was inverted last time
+    root: '',          // the rootNode line
+    data: null,        // the current data
+    selectedIndex: 0   // the current selected index
+  };
 }
 
 // Update the SIGWINCH listener to reload data if necessary
