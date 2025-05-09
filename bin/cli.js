@@ -391,7 +391,7 @@ if (commandRegistry[command]) {
     console.error(`Unknown command: ${command}`);
     console.log('Available commands: init, edit');
     // Close the process if no command is found
-    cleanUp();
+    cleanUp(state);
 }
 
 
