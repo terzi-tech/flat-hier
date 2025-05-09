@@ -17,6 +17,7 @@ import {
 import commandRegistry from '../src/cli/commandRegistry.js';
 import {resetLastRendered} from './renderers/consoleRenderer.js';
 import { cleanUp } from '../src/utils/cleanUp.js';
+import { exitWithoutClear } from '../src/utils/exitWithoutClear.js';
 
 /* ──────────────────────────────────────────────────────────
    CONFIG & STATE
@@ -91,13 +92,13 @@ export async function cleanupStaleTemps(dir) {
 
 
 
-// Exit without clearing console
-export function exitWithoutClear() {
-  process.stdout.write('\x1B[?25h'); // show cursor
-  process.stdin.setRawMode(false);
-  process.stdin.pause();
-  process.exit(0);
-}
+// // Exit without clearing console
+// export function exitWithoutClear() {
+//   process.stdout.write('\x1B[?25h'); // show cursor
+//   process.stdin.setRawMode(false);
+//   process.stdin.pause();
+//   process.exit(0);
+// }
 
 
 /* ──────────────────────────────────────────────────────────

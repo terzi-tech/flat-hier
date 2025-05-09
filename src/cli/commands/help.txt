@@ -1,0 +1,17 @@
+Flat-Hier CLI Help Page
+
+Usage:
+  fhr <command> [options]
+
+Commands:
+  init      Initialize a new project with a default template.
+    init <name>  Initialize a new project with a specified name.
+
+
+  editor    Launch the interactive editor to manage your flat-hier data.
+  help      Display this help page.
+
+Description:
+  Flat-Hier is a CLI tool for managing hierarchical data structures.
+  Use the 'init' command to create a new project, the 'editor' command to
+  interactively manage your flat-hier data, and the 'help' command to view this page.

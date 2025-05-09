@@ -1,8 +1,15 @@
+import fs from 'fs';
+import path from 'path';
+import { exitWithoutClear } from '../../utils/exitWithoutClear.js';
+import { fileURLToPath } from 'url';
+
 const helpCommand = () => {
-    console.log(`Available commands:\n`);
-    console.log(`  init    - Initialize a new project.`);
-    console.log(`  editor  - Launch the editor.`);
-    console.log(`  help    - Display this help message.`);
+    const __filename = fileURLToPath(import.meta.url);
+    const __dirname = path.dirname(__filename);
+    const helpFilePath = path.resolve(__dirname, 'help.txt');
+    const helpText = fs.readFileSync(helpFilePath, 'utf-8');
+    console.log(helpText);
+    exitWithoutClear();
 };
 
 export default helpCommand;
