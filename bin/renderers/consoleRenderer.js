@@ -95,11 +95,14 @@ function renderShortcuts() {
   const shortcuts = "↑↓ Nav | ↵ Edit Title | Esc: Quit | ← → Promote/Demote | Shift + ↑↓ Move Item | r: Refresh";
   const [width, height] = process.stdout.getWindowSize();
 
-  // Clear the last line before rendering the shortcuts bar
-  moveCursor(height, 1);
-  process.stdout.write('\x1b[2K'); // Clear the line
+  // Clear the second-to-last and last lines before rendering the shortcuts bar
+  moveCursor(height - 1, 1);
+  process.stdout.write('\x1b[2K'); // Clear the second-to-last line
 
-  // Render the shortcuts bar
+  moveCursor(height, 1);
+  process.stdout.write('\x1b[2K'); // Clear the last line
+
+  // Render the shortcuts bar on the last line
   const bar = shortcuts.padEnd(width, ' ');
   process.stdout.write(`\x1b[7m${bar}\x1b[0m`);
 }

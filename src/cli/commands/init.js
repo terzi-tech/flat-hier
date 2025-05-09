@@ -2,8 +2,9 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import readline from 'readline';
-import { state, cleanup } from '../../../bin/cli.js';
+import { state } from '../../../bin/cli.js';
 import { generateUniqueId } from '../../index.js';
+import { cleanUp } from '../../utils/cleanUp.js'; // Import the cleanup function
 
 const initCommand = () => {
     const __filename = fileURLToPath(import.meta.url);
@@ -81,7 +82,7 @@ const initCommand = () => {
         // Set state.mode to 'edit'
         state.mode = 'edit';
 
-        cleanup(); // Ensure cleanup is called at the end of the init command
+        cleanUp(state); // Ensure cleanup is called at the end of the init command
 
         process.exit(0);
     };

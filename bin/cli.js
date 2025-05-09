@@ -16,6 +16,7 @@ import {
 } from '../src/index.js';
 import commandRegistry from '../src/cli/commandRegistry.js';
 import {resetLastRendered} from './renderers/consoleRenderer.js';
+import { cleanUp } from '../src/utils/cleanUp.js';
 
 /* ──────────────────────────────────────────────────────────
    CONFIG & STATE
@@ -74,7 +75,7 @@ function showHelp() {
   console.log('  ←     Promote');
 }
 
-function cleanupStaleTemps(dir) {
+export async function cleanupStaleTemps(dir) {
   if (!fs.existsSync(dir)) {
     console.warn(`Directory does not exist: ${dir}`);
     return;
@@ -88,17 +89,7 @@ function cleanupStaleTemps(dir) {
     });
 }
 
-// e.g. call cleanupStaleTemps(path.dirname(state.ds.filePath)) in boot()
 
-export function cleanup() {
-  cleanupStaleTemps(path.dirname(state.ds.filePath));
-  console.clear();
-  console.log('\nExiting.');
-  process.stdout.write('\x1B[?25h'); // show cursor
-  process.stdin.setRawMode(false);
-  process.stdin.pause();
-  process.exit(0);
-}
 
 // Exit without clearing console
 export function exitWithoutClear() {
@@ -313,8 +304,8 @@ async function moveUpHandler() {
 ────────────────────────────────────────────────────────── */
 const keyMap = {
   navigate: {
-    '\u0003': cleanup,       // Ctrl+C
-    escape: cleanup,
+    '\u0003': () => cleanUp(state),       // Ctrl+C
+    escape: () => cleanUp(state),
     up:    () => moveSelection(-1),
     down:  () => moveSelection(1),
     return: startEdit,
@@ -400,7 +391,8 @@ if (commandRegistry[command]) {
     console.error(`Unknown command: ${command}`);
     console.log('Available commands: init, edit');
     // Close the process if no command is found
-    cleanup();
+    cleanUp();
 }
+
 
 

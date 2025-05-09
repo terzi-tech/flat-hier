@@ -1,4 +1,5 @@
 import initCommand from './commands/init.js';
+import helpCommand from './commands/help.js';
 import { boot } from '../../bin/cli.js';
 import { state } from '../../bin/cli.js';
 
@@ -9,8 +10,7 @@ const commandRegistry = {
         initCommand(...args);
     },
     editor: boot,
+    help: helpCommand,
 };
-
-
 
 export default commandRegistry;
