@@ -20,6 +20,8 @@ import { renderToConsole } from './renderers/consoleRenderer.js';
 /* ──────────────────────────────────────────────────────────
    CONFIG & STATE
 ────────────────────────────────────────────────────────── */
+console.clear();
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname  = path.dirname(__filename);
 
@@ -48,7 +50,6 @@ export async function boot() {
     await state.ds.loadData();
     state.data = state.ds.getData();
     render();
-    showHelp();
   } catch (err) {
     console.error('Failed to load JSON:', err);
     process.exit(1);
@@ -62,17 +63,7 @@ function render() {
 /* ──────────────────────────────────────────────────────────
    HELP & CLEANUP
 ────────────────────────────────────────────────────────── */
-function showHelp() {
-  console.log('Controls:');
-  console.log('  ↑   Move up');
-  console.log('  ↓   Move down');
-  console.log('  ENTER  Edit title');
-  console.log('  ESC    Exit / Cancel edit');
-  console.log('  Ctrl+N Add new object');
-  console.log('  DEL    Delete object');
-  console.log('  →     Demote');
-  console.log('  ←     Promote');
-}
+
 
 export async function cleanupStaleTemps(dir) {
   if (!fs.existsSync(dir)) {
