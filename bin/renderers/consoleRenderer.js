@@ -14,17 +14,23 @@ const config = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
 const templateFilePath = path.resolve(process.cwd(), config.templateFileName);
 const treeDataFilePath = path.resolve(process.cwd(), config.filepath);
 
-
 const dataService = new DataService(treeDataFilePath);
 
-
 let _lastRendered = {
-  lines: [],         // array of strings (with trailing “\n”)
+  lines: [],         // array of strings (with trailing "\n")
   highlighted: null, // which index was inverted last time
   root: '',          // the rootNode line
   data: null,        // the current data
   selectedIndex: 0   // the current selected index
 };
+
+// Truncate a string to the current terminal width
+function truncateToWidth(str) {
+  const [cols] = process.stdout.getWindowSize();
+  const hasNL = str.endsWith('\n');
+  const body  = hasNL ? str.slice(0, -1) : str;
+  return body.slice(0, cols) + (hasNL ? '\n' : '');
+}
 
 export async function renderToConsole(data, selectedIndex) {
   _lastRendered.data = data;
@@ -42,7 +48,7 @@ export async function renderToConsole(data, selectedIndex) {
   // If root changed, rewrite it unconditionally:
   if (rootNode !== _lastRendered.root) {
     moveCursor(1, 1);
-    process.stdout.write(rootNode);
+    process.stdout.write(truncateToWidth(rootNode));
     _lastRendered.root = rootNode;
   }
 
@@ -55,15 +61,16 @@ export async function renderToConsole(data, selectedIndex) {
       moveCursor(2 + i, 1);
 
       if (i === toHighlight)   invertWrite(line);
-      else                     process.stdout.write(line);
+      else                     process.stdout.write(truncateToWidth(line));
     }
   });
 
   // If the height of the new visible slice is smaller, clear out old trailing lines
   if (_lastRendered.lines.length > visible.length) {
+    const [width] = process.stdout.getWindowSize();
     for (let i = visible.length; i < _lastRendered.lines.length; i++) {
       moveCursor(2 + i, 1);
-      process.stdout.write(' '.repeat(_lastRendered.lines[i].length)); 
+      process.stdout.write(' '.repeat(width));
     }
   }
 
@@ -84,11 +91,11 @@ function calculateVisibleRange(tree, selectedIndex) {
 
 function moveCursor(row, col = 1) {
   process.stdout.write(`\x1b[${row};${col}H`); // Move cursor
-  process.stdout.write(`\x1b[2K`); // Clear the line
+  process.stdout.write(`\x1b[2K`); // Clear the entire line
 }
 
 function invertWrite(line) {
-  process.stdout.write(`\x1b[7m${line}\x1b[0m`);
+  process.stdout.write(`\x1b[7m${truncateToWidth(line)}\x1b[0m`);
 }
 
 function renderShortcuts() {
@@ -97,27 +104,24 @@ function renderShortcuts() {
 
   // Clear the second-to-last and last lines before rendering the shortcuts bar
   moveCursor(height - 1, 1);
-  process.stdout.write('\x1b[2K'); // Clear the second-to-last line
-
   moveCursor(height, 1);
-  process.stdout.write('\x1b[2K'); // Clear the last line
 
-  // Render the shortcuts bar on the last line
-  const bar = shortcuts.padEnd(width, ' ');
+  // Render the shortcuts bar on the last line, truncated and padded
+  const bar = shortcuts.slice(0, width).padEnd(width, ' ');
   process.stdout.write(`\x1b[7m${bar}\x1b[0m`);
 }
 
 export async function resetLastRendered() {
   _lastRendered = {
-    lines: [],         // array of strings (with trailing “\n”)
-    highlighted: null, // which index was inverted last time
-    root: '',          // the rootNode line
-    data: null,        // the current data
-    selectedIndex: 0   // the current selected index
+    lines: [],
+    highlighted: null,
+    root: '',
+    data: null,
+    selectedIndex: 0
   };
 }
 
-// Update the SIGWINCH listener to reload data if necessary
+// Handle resize
 process.on('SIGWINCH', async () => {
   console.clear();
   _lastRendered = {
@@ -130,12 +134,11 @@ process.on('SIGWINCH', async () => {
   console.log('Resize detected. Resetting rendering state.');
 
   try {
-    // Reload data from DataService
     await dataService.loadData();
     const data = dataService.getData();
 
     if (data) {
-      renderToConsole(data, 0); // Render with the reloaded data
+      renderToConsole(data, 0);
     } else {
       console.error('No data available to render.');
     }
