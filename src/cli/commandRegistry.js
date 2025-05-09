@@ -12,6 +12,7 @@ const commandRegistry = {
     editor: boot,
     help: helpCommand,
     '--help': helpCommand,
+    '-h': helpCommand,
 };
 
 export default commandRegistry;
