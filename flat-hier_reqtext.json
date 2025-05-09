@@ -81,14 +81,6 @@
     "description": "Delete Item by outline number."
   },
   {
-    "unique_id": "2025-05-07T14:48:38.028Z-75047e32",
-    "title": "BUG: Deleting Last Item",
-    "hier": 2,
-    "outline": "2.2.1",
-    "status": "Passed",
-    "description": "When deleting the last item in editor the selected index incremented past the end of the list. This caused an error when trying to add new item."
-  },
-  {
     "unique_id": "2025-05-07T14:46:58.903Z-11f9bdee",
     "title": "Demote/Promote Item and Children",
     "hier": 1,
@@ -153,28 +145,12 @@
     "description": "Allows users to move items up or down in the hierarchy using Shift combined with the up or down arrow keys."
   },
   {
-    "unique_id": "2025-05-07T15:14:37.322Z-39de1fb3",
-    "title": "BUG: Moving past children messes up selected index",
-    "hier": 2,
-    "outline": "3.4.1",
-    "status": "Passed",
-    "description": "Fixes an issue where moving an item past its children causes the selected index to become inconsistent."
-  },
-  {
     "unique_id": "2025-05-07T15:11:14.386Z-49451bab",
     "title": "Ctrl+N Add Item",
     "hier": 1,
     "outline": "3.5",
     "status": "Passed",
     "description": "Enables users to add a new item to the hierarchy by pressing Ctrl+N."
-  },
-  {
-    "unique_id": "2025-05-07T15:11:57.514Z-ae8e2126",
-    "title": "BUG: Adding Item Enter Title Appears Above Index",
-    "hier": 2,
-    "outline": "3.5.1",
-    "status": "Passed",
-    "description": "Fixes an issue where the 'Enter Title' prompt appears above the selected index when adding a new item."
   },
   {
     "unique_id": "2025-05-07T15:14:15.153Z-6621e202",
