@@ -230,6 +230,6 @@
     "hier": 1,
     "outline": "4.3",
     "status": "In Dev",
-    "description": "Call add item after the entered outline number. This will add the item after the selected item."
+    "description": "The command fhr --add-after <outline number> <title> adds a new item after the specified outline number. The outline number is the number of the item in the hierarchy, and the title is the title of the new item. This command is used to add a new item to the hierarchy at a specific location."
   }
 ]
