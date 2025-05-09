@@ -13,7 +13,7 @@ const initCommand = () => {
     const configPath = path.resolve(__dirname, '../../../flat-hier.config.json'); // Updated to dynamically resolve the config file path
 
     // Parse command-line arguments
-    const args = process.argv.slice(2);
+    const args = process.argv.slice(2).map(arg => (arg === '-n' ? '--name' : arg)); // Normalize -n to --name
     const nameIndex = args.indexOf('--name');
     let outputFileName = nameIndex !== -1 && args[nameIndex + 1] ? args[nameIndex + 1] : null;
 
