@@ -11,4 +11,9 @@ const commandRegistry = {
     editor: boot,
 };
 
+commandRegistry.edit = () => {
+    console.log('Starting edit mode...');
+    boot();
+};
+
 export default commandRegistry;

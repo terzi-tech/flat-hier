@@ -100,6 +100,14 @@ export function cleanup() {
   process.exit(0);
 }
 
+// Exit without clearing console
+export function exitWithoutClear() {
+  process.stdout.write('\x1B[?25h'); // show cursor
+  process.stdin.setRawMode(false);
+  process.stdin.pause();
+  process.exit(0);
+}
+
 
 /* ──────────────────────────────────────────────────────────
    NAVIGATION & SELECTION
@@ -392,12 +400,7 @@ if (commandRegistry[command]) {
     console.error(`Unknown command: ${command}`);
     console.log('Available commands: init, edit');
     // Close the process if no command is found
-    process.exit(1);
+    cleanup();
 }
-
-commandRegistry.edit = () => {
-  console.log('Starting edit mode...');
-    boot();
-};
 
 
