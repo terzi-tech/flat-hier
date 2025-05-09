@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 
-console.log('This is a CLI tool for managing your tasks.');
-
 import helpCommand  from '../src/cli/commands/help.js';
 import initCommand from '../src/cli/commands/init.js';
 
 const commandMap = {
     help: helpCommand,
+    '--help': helpCommand,
+    '-h': helpCommand,
     init: initCommand
 };
 
