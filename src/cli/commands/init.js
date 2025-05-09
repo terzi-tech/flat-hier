@@ -13,7 +13,7 @@ const initCommand = () => {
     // Parse command-line arguments
     const args = process.argv.slice(2).map(arg => (arg === '-n' ? '--name' : arg)); // Normalize -n to --name
     const nameIndex = args.indexOf('--name');
-    let outputFileName = nameIndex !== -1 && args[nameIndex + 1] ? args[nameIndex + 1] : null;
+    let outputFileName = nameIndex !== -1 && args[nameIndex + 1] ? args[nameIndex + 1].replace(/\s+/g, '_') : null;
 
     const promptForFileName = (callback) => {
         const rl = readline.createInterface({
