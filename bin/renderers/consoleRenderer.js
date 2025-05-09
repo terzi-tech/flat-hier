@@ -1,5 +1,4 @@
 import { createAsciiTree } from '../../src/index.js';
-import DataService from '../../src/services/DataService.js';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -14,7 +13,16 @@ const config = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
 const templateFilePath = path.resolve(process.cwd(), config.templateFileName);
 const treeDataFilePath = path.resolve(process.cwd(), config.filepath);
 
-const dataService = new DataService();
+// Lazy initialize DataService only when required
+let dataService;
+
+function getDataService() {
+    if (!dataService) {
+        const DataService = require('../../src/services/DataService.js').default;
+        dataService = new DataService();
+    }
+    return dataService;
+}
 
 let _lastRendered = {
   lines: [],         // array of strings (with trailing "\n")
@@ -33,6 +41,8 @@ function truncateToWidth(str) {
 }
 
 export async function renderToConsole(data, selectedIndex) {
+  const ds = getDataService();
+  await ds.loadData();
   _lastRendered.data = data;
   _lastRendered.selectedIndex = selectedIndex;
 
@@ -134,8 +144,9 @@ process.on('SIGWINCH', async () => {
   console.log('Resize detected. Resetting rendering state.');
 
   try {
-    await dataService.loadData();
-    const data = dataService.getData();
+    const ds = getDataService();
+    await ds.loadData();
+    const data = ds.getData();
 
     if (data) {
       renderToConsole(data, 0);
