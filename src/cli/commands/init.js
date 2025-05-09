@@ -2,9 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import readline from 'readline';
-import { state } from '../../../bin/editor.js';
 import { generateUniqueId } from '../../index.js';
-import { cleanUp } from '../../utils/cleanUp.js'; // Import the cleanup function
 
 const initCommand = () => {
     const __filename = fileURLToPath(import.meta.url);
@@ -78,11 +76,6 @@ const initCommand = () => {
 
         // Update the config file with a relative path
         updateConfigFile(finalFileName);
-
-        // Set state.mode to 'edit'
-        state.mode = 'edit';
-
-        cleanUp(state); // Ensure cleanup is called at the end of the init command
 
         process.exit(0);
     };

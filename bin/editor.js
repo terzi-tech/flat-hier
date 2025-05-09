@@ -19,6 +19,7 @@ import {resetLastRendered} from './renderers/consoleRenderer.js';
 import { cleanUp } from '../src/utils/cleanUp.js';
 import { exitWithoutClear } from '../src/utils/exitWithoutClear.js';
 
+commandRegistry.initCommand();
 /* ──────────────────────────────────────────────────────────
    CONFIG & STATE
 ────────────────────────────────────────────────────────── */
