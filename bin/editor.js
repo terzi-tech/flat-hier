@@ -4,8 +4,6 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import {
-  renderToConsole,
-  DataService,
   addObject,
   computeOutlines,
   demote,
@@ -17,7 +15,8 @@ import {
 import {resetLastRendered} from './renderers/consoleRenderer.js';
 import { cleanUp } from '../src/utils/cleanUp.js';
 import { exitWithoutClear } from '../src/utils/exitWithoutClear.js';
-
+import DataService from '../src/services/DataService.js';
+import { renderToConsole } from './renderers/consoleRenderer.js';
 /* ──────────────────────────────────────────────────────────
    CONFIG & STATE
 ────────────────────────────────────────────────────────── */

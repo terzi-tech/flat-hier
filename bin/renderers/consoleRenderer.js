@@ -2,6 +2,7 @@ import { createAsciiTree } from '../../src/index.js';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import DataService from '../../src/services/DataService.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname  = path.dirname(__filename);
@@ -18,7 +19,6 @@ let dataService;
 
 function getDataService() {
     if (!dataService) {
-        const DataService = require('../../src/services/DataService.js').default;
         dataService = new DataService();
     }
     return dataService;
