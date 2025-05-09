@@ -14,12 +14,10 @@ import {
   moveUp,
   deleteObject
 } from '../src/index.js';
-import commandRegistry from '../src/cli/commandRegistry.js';
 import {resetLastRendered} from './renderers/consoleRenderer.js';
 import { cleanUp } from '../src/utils/cleanUp.js';
 import { exitWithoutClear } from '../src/utils/exitWithoutClear.js';
 
-commandRegistry.initCommand();
 /* ──────────────────────────────────────────────────────────
    CONFIG & STATE
 ────────────────────────────────────────────────────────── */
@@ -385,18 +383,7 @@ if (!keypressActive) {
 /* ──────────────────────────────────────────────────────────
    START
 ────────────────────────────────────────────────────────── */
-// const [,, command, ...args] = process.argv;
 
-// if (!command) {
-//     console.log("No command provided. Use 'fhr-editor --help' for usage information.");
-//     process.exit(0);
-// } else if (commandRegistry[command]) {
-//     commandRegistry[command](...args);
-// } else {
-//     console.error(`Unknown command: ${command}`);
-//     console.log("Run 'fhr-editor --help' for usage information.");
-//     process.exit(1);
-// }
 
 boot();
 
